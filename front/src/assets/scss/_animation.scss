@@ -1,0 +1,42 @@
+@keyframes cloud {
+    0% {
+        transform: translateX(-250px);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform : translateX(100vw)
+    }
+}
+
+@keyframes cloud2 {
+    0% {
+        transform: translateX(100vw);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.25;
+        transform : translateX(-250px)
+    }
+}
+
+@keyframes left-arrow {
+    from {
+        transform: translateX(0px)
+    }
+    to {
+        transform: translateX(10px);
+    }
+
+}
+
+@keyframes right-arrow {
+
+    from {
+        transform: translateX(0)
+    }
+    to {
+        transform: translateX(-5px);
+    }
+    
+}
