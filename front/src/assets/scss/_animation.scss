@@ -15,28 +15,45 @@
         opacity: 1;
     }
     100% {
-        opacity: 0.25;
+        opacity: 0;
         transform : translateX(-250px)
     }
 }
 
 @keyframes left-arrow {
-    from {
+    0% {
         transform: translateX(0px)
     }
-    to {
-        transform: translateX(10px);
+    50% {
+        transform: translateX(2.5px);
+    }
+    100% {
+        transform: translateX(0px)
     }
 
 }
 
 @keyframes right-arrow {
+    0% {
+        transform: translateX(0px)
+    }
+    50% {
+        transform: translateX(-2.5px);
+    }
+    100% {
+        transform: translateX(0px)
+    }
 
-    from {
-        transform: translateX(0)
-    }
-    to {
-        transform: translateX(-5px);
-    }
-    
 }
+
+@keyframes star-anim {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
