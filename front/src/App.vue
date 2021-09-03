@@ -2,6 +2,7 @@
   <div id="app">
 
       <main>
+          <Menu />
           <!-- IMPORTANT VUEJS Router affichage de la "view" correspondant à l'url demandée //-->
           <!-- WARNING VUEJS ROUTER utiliser :key="$route.fullPath" pour spécifier à vuejs qu'il faut surveiller toute l'url et non juste le composant chargé" //-->
           <router-view
@@ -14,14 +15,14 @@
 </template>
 
 <script>
-// import Header from './components/Header.vue';
-// import Footer from './components/Footer.vue';
-// import OCookingRecipeList from './components/OCookingRecipeList.vue';
+import Menu from './components/Menu.vue';
+
 export default {
   props: {
   },
   name: 'App',
   components: {
+    Menu,
     // NOTICE VUJS l'ordre de déclaration des composants utilisable par l'application n'a pas d'importance
   },
   data() {
@@ -35,8 +36,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use "./assets/scss/variable.scss";
+
+main {
+  display:flex;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  padding: variable.$gutter;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

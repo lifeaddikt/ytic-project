@@ -1,3 +1,5 @@
+/// Animations des nuages 
+
 @keyframes cloud {
     0% {
         transform: translateX(-250px);
@@ -19,6 +21,8 @@
         transform : translateX(-250px)
     }
 }
+
+/// Animations du entry
 
 @keyframes left-arrow {
     0% {
@@ -46,6 +50,9 @@
 
 }
 
+
+/// Animation des étoile de l'intro
+
 @keyframes star-anim {
     0% {
       opacity: 1;
@@ -55,5 +62,17 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+/// Animation projects list
+
+@keyframes projectAppear {
+    0% {
+        display:block;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
   }

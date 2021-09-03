@@ -7,12 +7,14 @@ $hard-pink: #fb3cce;
 
 // spacing
 $gutter: 1rem;
+$tiny-gutter: $gutter * 0.25;
 $small-gutter: $gutter * 0.5;
 $big-gutter: $gutter * 2;
 
 // border 
 
 $normal-border: 2px solid $hard-pink;
+$menu-border: 3px solid $hard-pink;
 
 
 //box-shadow

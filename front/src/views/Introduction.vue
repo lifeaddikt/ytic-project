@@ -7,14 +7,14 @@
         <div class="introduction__shine fifth layer" data-speed="4"></div>
         <div class="introduction__shine sixth layer" data-speed="2"></div>
 
-        <img class="introduction__cloud-1" src="../assets/images/nuage.png">
+        <img class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
 
         <div class="introduction__entry">
-            <img class="introduction__title layer" data-speed="-1" src="../assets/images/title.png">
+            <img class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
             <button class="introduction__button layer" data-speed="0.25" type="button"><span>4</span> Entrer <span>3</span></button>
         </div>
 
-        <img class="introduction__cloud-2" src="../assets/images/nuage.png">
+        <img class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
     </section>
 </template>
 
