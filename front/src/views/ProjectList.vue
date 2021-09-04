@@ -1,10 +1,10 @@
 <template>
     <section class="project-list">
         <ul>
-            <li v-for="(project, index) in projectsList" :key="project.id">
-                ({{index + 1}}) {{project.title.rendered}}
-                <img v-if="project.acf.first_picture" :src="project.acf.first_picture.url" :alt="altPicture(project)" :style="position.first[randomPositionIndex()]"/>
-                <img v-if="project.acf.second_picture" :src="project.acf.second_picture.url" :alt="altPicture(project)" :style="position.second[randomPositionIndex()]"/>
+            <li v-for="(item, index) in projectsList" :key="item.project.id">
+                ({{index + 1}}) {{item.project.title.rendered}}
+                <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
+                <img v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
             </li>
         </ul>
     </section>
@@ -26,7 +26,7 @@ export default {
             projectsList: [],
             position:{
                 first:['left:10%; top:20%;', 'top:5%; right:10%;', 'bottom:0; right:10%;'],
-                second:['top:10%; bottom:20%;', 'left:10%; bottom:20%;', 'top:20%; left:10%;' ]
+                second:['right:10%; bottom:20%;', 'left:10%; bottom:20%;', 'top:20%; left:10%;']
             },
         }
     },
@@ -34,7 +34,7 @@ export default {
     methods : {
         async loadProjects(){
             const list = await projectService.loadProjects();
-            this.projectsList = list.reverse();
+            this.projectsList = list.reverse().map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
         },
 
         randomPositionIndex(){
@@ -49,6 +49,10 @@ export default {
             return project.acf.first_picture.alt ? project.acf.first_picture.alt : project.title.rendered;
 
         },
+    },
+
+    computed : {
+
     },
     
 }
