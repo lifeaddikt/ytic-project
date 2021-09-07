@@ -2,19 +2,19 @@
 
 <article class="music-element">
     <div class="music-element__visual">
-        <img class="music-element__visual__cover" src="../assets/images/cover.png" />
+        <img class="music-element__visual__cover" :src="imageSrc" />
         <transition name="play">
         <img v-if="isPlaying" src="../assets/images/CD.png" class="music-element__visual__CD" />
         </transition>
     </div>
 
     <div class="music-element__description">
-        <p>Titre</p>
-        <p>Artiste</p>
-        <p>Production</p>
-        <p>Morceau original</p>
+        <p>{{title}}</p>
+        <p>{{artiste}}</p>
+        <p>{{production}}</p>
+        <p>{{type}}</p>
         <div class="music-element__audio-player">
-            <audio @timeupdate="timeSynchronisation" src="../assets/images/sound.mp3" preload=”metadata” loop />
+            <audio :id="id" @timeupdate="timeSynchronisation" src="../assets/images/sound.mp3" preload=”metadata” loop />
             <button v-show="!isPlaying" @click="playMusic" class="music-element__audio-player-button"><i class="fas fa-play"></i></button>
             <button v-show="isPlaying" @click="playMusic" class="music-element__audio-player-button"><i class="fas fa-pause"></i></button>
             <span class="music-element__audio-currentTime">{{currentTime}}</span>
@@ -32,6 +32,7 @@ export default {
     mounted(){
 
         this.loadAudioContent();
+        console.log(this.imageSrc);
     },
 
     data(){
@@ -46,12 +47,19 @@ export default {
 
     props: {
         // recipe: Object,
+        title: String,
+        artiste: String,
+        production: String,
+        type:String,
+        src: String,
+        imageSrc: String,
+        id:Number,
     },
 
     methods: {
-        playMusic(){
+        playMusic(event){
             this.isPlaying = !this.isPlaying;
-            const audio = document.querySelector('audio');
+            const audio = event.currentTarget.closest('.music-element__audio-player').querySelector('audio');
 
               if(this.playState === 'play') {
                 audio.play();
@@ -62,28 +70,29 @@ export default {
             }
         },
 
-        timeSynchronisation(){
-            const audio = document.querySelector('audio');
-            const timeLine = document.querySelector('.music-element__audio-timeline');
+        timeSynchronisation(event){
+            const audio = event.currentTarget.closest('.music-element__audio-player').querySelector('audio');
+            const timeLine = event.currentTarget.closest('.music-element__audio-player').querySelector('.music-element__audio-timeline');
             timeLine.value = Math.floor(audio.currentTime);
             this.currentTime = this.calculateTime(timeLine.value);
         },
 
-        changeTime(){
-            const audio = document.querySelector('audio');
-            const timeLine = document.querySelector('.music-element__audio-timeline');
+        changeTime(event){
+            const audio = event.currentTarget.closest('.music-element__audio-player').querySelector('audio');
+            const timeLine = event.currentTarget.closest('.music-element__audio-timeline');
             audio.currentTime = timeLine.value;
         },
 
         loadAudioContent(){
-            const audio = document.querySelector('audio');
+            const audio = document.getElementById(this.id);
 
             audio.addEventListener('loadedmetadata', () => {
+        console.log(audio.duration);
             this.audioDuration = this.calculateTime(audio.duration);
             this.maxDuration = Math.floor(audio.duration);
             });
 
-            const timeLine = document.querySelector('.music-element__audio-timeline');
+            const timeLine = audio.closest('.music-element__audio-player').querySelector('.music-element__audio-timeline');
 
             timeLine.addEventListener('input', () => {
             this.currentTime = this.calculateTime(timeLine.value);
@@ -112,6 +121,7 @@ export default {
 .music-element {
     display:flex;
     align-items:center;
+    justify-content: center;
 
     &__audio-player {
         display:flex;
@@ -130,7 +140,10 @@ export default {
     }
 
     img {
-        width:125px;
+        width:110px;
+        @media (min-width:768px){
+            width:125px;
+        }
     }
 
     &__visual {

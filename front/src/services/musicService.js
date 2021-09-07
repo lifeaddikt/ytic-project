@@ -4,9 +4,9 @@ const musicService = {
 
     baseUri : process.env.VUE_APP_WORDPRESS_API_URL + '/wp/v2',
 
-    async loadProjects(){
-        const response = await axios.get(`${projectService.baseUri}/music?per_page=100`);
-        
+    async loadMusics(){
+        const response = await axios.get(`${musicService.baseUri}/music?_embed=true&per_page=100`);
+        console.log(response.data);
         return response.data;
     },
 
