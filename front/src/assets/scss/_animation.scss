@@ -76,3 +76,30 @@
         opacity: 1;
     }
   }
+
+
+/// Music animations 
+
+  @keyframes turn {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes moveLeft {
+    from {
+        left:0;
+    } to {
+        left:-20px;
+    }
+}
+
+@keyframes moveRight {
+    from {
+        left:-20px;
+    } to {
+        left:0px;
+    }
+}

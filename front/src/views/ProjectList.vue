@@ -1,20 +1,30 @@
 <template>
-    <section class="project-list">
-        <ul>
-            <li v-for="(item, index) in projectsList" :key="item.project.id">
-                ({{index + 1}}) {{item.project.title.rendered}}
-                <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
-                <img v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
-            </li>
-        </ul>
-    </section>
+    <main>
+        <Menu />
+        <section class="project-list">
+            <ul>
+                <li v-for="(item, index) in projectsList" :key="item.project.id">
+                    <router-link :to="{ name: 'project', params: { slug: item.project.slug } }" >
+                    ({{index + 1}}) {{item.project.title.rendered}}
+                    </router-link>
+                    <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
+                    <img v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
+                </li>
+            </ul>
+        </section>
+    </main>
     
 </template>
 
 <script>
+import Menu from '../components/Menu.vue';
 import projectService from '../services/projectService.js';
 
 export default {
+
+    components: {
+        Menu,
+  },
 
     created(){
 
@@ -84,7 +94,7 @@ export default {
     @media (min-width:1024px){
         padding-top:0rem;
         font-weight: normal;
-        font-size:40px;
+        font-size:35px;
         display: flex;
         align-items: flex-end;
     }

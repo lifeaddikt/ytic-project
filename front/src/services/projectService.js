@@ -10,6 +10,11 @@ const projectService = {
         return response.data;
     },
 
+    async loadProject(slug){
+        const response = await axios.get(`${projectService.baseUri}/project?_embed&slug=${slug}`);
+        return response.data[0];
+    }
+
 };
 
 export default projectService;

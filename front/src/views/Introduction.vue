@@ -1,5 +1,5 @@
 <template>
-    <section class="introduction">
+    <main class="introduction">
         <div class="introduction__shine first layer" data-speed="-3"></div>
         <div class="introduction__shine second layer" data-speed="1"></div>
         <div class="introduction__shine third layer" data-speed="3"></div>
@@ -7,15 +7,17 @@
         <div class="introduction__shine fifth layer" data-speed="4"></div>
         <div class="introduction__shine sixth layer" data-speed="2"></div>
 
-        <img class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
+        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
 
         <div class="introduction__entry">
-            <img class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
-            <button class="introduction__button layer" data-speed="0.25" type="button"><span>4</span> Entrer <span>3</span></button>
+            <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
+            <router-link :to="{ name: 'projects-list' }">
+                <button class="introduction__button layer" data-speed="0.25" type="button"><span>4</span> Entrer <span>3</span></button>
+            </router-link>
         </div>
 
-        <img class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
-    </section>
+        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
+    </main>
 </template>
 
 <script>

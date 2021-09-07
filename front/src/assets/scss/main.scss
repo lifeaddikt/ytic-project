@@ -9,9 +9,79 @@ body {
     position:relative;
 }
 
+a {
+    color:black;
+    text-decoration: none;
+}
+
+main {
+    display:flex;
+    padding: variable.$gutter;
+  }
+
 @media (min-width:1024px){
     body {
         background-image: url("../images/desktop_background.jpg");
         background-size: cover;
     }
+}
+
+
+/// Informations page 
+
+.page {
+    
+    padding: variable.$small-gutter;
+    background-color: white;
+    border: variable.$black-border;
+    text-align:left;
+
+    img {
+        display:block;
+        max-width:100%;
+        margin:auto;
+    }
+
+    @media (min-width:1024px){
+        padding: variable.$gutter;
+    }
+
+    h1, h2 {
+        margin:variable.$big-gutter 0;
+    }
+
+    p, li {
+        margin-bottom:variable.$small-gutter;
+    }
+
+    h1 {
+        font-weight: bold;
+        font-size: 25px;
+        @media (min-width:1024px){
+            font-size:35px;
+        }
+    }
+
+    h2 {
+        font-weight: bold;
+        &::before {
+            content: '- '
+        }
+        &::after {
+            content: ' -'
+        }
+    }
+
+    li {
+        &:before {
+            content:'✿';
+            color:black;
+            margin-left: -4px;
+            margin-right: 10px;
+            @media (min-width:1024px){
+                margin-left: -10px;
+            }
+        }
+    }
+
 }
