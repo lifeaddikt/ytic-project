@@ -8,7 +8,6 @@
             :key="$route.fullPath"
           />
 
-
   </div>
 </template>
 

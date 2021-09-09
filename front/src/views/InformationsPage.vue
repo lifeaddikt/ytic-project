@@ -2,11 +2,13 @@
 
     <main>
         <Menu />
-        <section class="page">
-            <h1>{{title}}</h1>
-            <div v-html="content">
-            </div>
-        </section>
+        <transition name="fade" appear>
+            <section class="page">
+                <h1>{{title}}</h1>
+                <div v-html="content">
+                </div>
+            </section>
+        </transition>
     </main>
     
 </template>

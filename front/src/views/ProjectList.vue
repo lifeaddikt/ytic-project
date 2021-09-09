@@ -73,6 +73,7 @@ export default {
 @use "../assets/scss/animation.scss";
 
 .project-list {
+    animation: componentAppear 1.5s linear forwards;
     min-height:calc(100vh - 2rem);
     width:100%;
     overflow:hidden;

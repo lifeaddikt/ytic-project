@@ -103,3 +103,34 @@
         left:0px;
     }
 }
+
+// Menu Animations 
+
+@keyframes openMenu {
+    from {
+        bottom: 16px;
+        opacity: 0;
+    } to {
+        bottom:10%;
+        opacity:1;
+    }
+}
+
+@keyframes closeMenu {
+    from {
+        opacity: 1;
+    } to {
+        bottom:16px;
+        opacity:0;
+    }
+}
+
+// Apparition composant 
+
+@keyframes componentAppear {
+    from {
+        opacity: 0;
+    } to {
+        opacity:1;
+    }
+}

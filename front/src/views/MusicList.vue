@@ -2,10 +2,13 @@
 
     <main>
         <Menu />
+        <transition name="fade">
         <section class="music-list">
             <MusicElement v-for="music in musicsList" :key="music.id" :title="music.title.rendered" :artiste="music.acf.artiste" :production="music.acf.production" :type="music._embedded['wp:term'].name" :date="music.acf.date" :src="music.acf.fichier_audio.url" :id="music.id" :imageSrc="music._embedded['wp:featuredmedia'][0].source_url" />
         </section>
+        </transition>
     </main>
+
     
 </template>
 
@@ -39,16 +42,7 @@ export default {
 
 <style scoped lang='scss'>
 @use "../assets/scss/variable.scss";
-
-main {
-    padding: variable.$gutter 0;
-
-    @media (min-width: 1025px){
-        padding: variable.$gutter;
-    }
-}
-
-
+@use "../assets/scss/animation.scss";
 
 .music-list {
     margin:auto;
@@ -59,6 +53,7 @@ main {
     overflow-x:initial;
     width:100%;
     min-height:90vh;
+    animation: componentAppear 1.5s linear forwards;
 
     @media (min-width: 1025px){
         margin: 0 auto;

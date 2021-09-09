@@ -9,14 +9,17 @@
             <p>France</p>
         </header>
 
-        <nav class="menu__navigation">
-            <ul>
-                <router-link :to="{ name: 'informations' }"><li>Infos</li></router-link>
-                <router-link :to="{ name: 'projects-list' }"><li>Projets</li></router-link>
-                <router-link :to="{ name: 'musics-list' }"><li>Musiques</li></router-link>
-                <li>Portfolio</li>
-            </ul>
-        </nav>
+        <transition name="menu">
+            <nav class="menu__navigation" v-if="!isMobile || isMobile && isOpen">
+                <ul>
+                    <router-link :to="{ name: 'informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
+                    <router-link :to="{ name: 'projects-list' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
+                    <router-link :to="{ name: 'musics-list' }" @click="isOpen = !isOpen"><li>Musiques</li></router-link>
+                    <li>Portfolio</li>
+                </ul>
+            </nav>
+        </transition>
+
 
         <nav class="menu__social-media">
             <ul>
@@ -26,7 +29,11 @@
             </ul>
         </nav>
 
-        <div class="menu__burger">
+        <div class="menu__burger" @click="isOpen = !isOpen">
+            <transition name="fade" mode="out-in">
+                <i v-if="!isOpen" class="fas fa-bars" key="open" ></i>
+                <i v-if="isOpen" class="fas fa-times" key="close"></i>
+            </transition>
         </div>
     </section>
     
@@ -35,6 +42,22 @@
 
 <script>
 export default {
+
+    data(){
+        return {
+            isOpen: false,
+            isMobile: false,
+        }
+    },
+
+    created(){
+
+        window.screen.width < 1024 ? this.isMobile = true : this.isMobile = false;
+
+    },
+
+    methods:{
+    },
 
     computed : {
         age(){
@@ -60,21 +83,27 @@ export default {
     flex-direction: column;
     min-width: 165px;
     height:calc(100vh - 2rem);
+    z-index:3;
 
     @media (max-width:1024px){
-        display:none;
         position:fixed;
-        flex-direction: row;
-        justify-content: space-between;
-        width:90%;
+        bottom:variable.$gutter;
+        height:auto;
+        display:block;
+        width:30%;
+        margin-right:0;
     }
 
     &__burger {
         display:none;
 
         @media (max-width:1024px){
-            margin-top:auto;
-            display:inline-block;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            position:fixed;
+            bottom:variable.$gutter;
+            right:21px;
             background-color: variable.$light-pink;
             border: variable.$menu-border;
             height:45px;
@@ -115,7 +144,26 @@ export default {
         }
 
         @media (max-width:1024px){
-        display:none;
+        position:fixed;
+        bottom:10%;
+        background-color: variable.$light-pink;
+        width:90%;
+        padding: variable.$small-gutter;
+        border: variable.$menu-border;
+
+        ul {
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap:variable.$gutter;
+
+            li {
+                border: none;
+            }
+
+            li:last-of-type {
+                grid-column-start: 2;
+            }
+        }
     }
     }
 

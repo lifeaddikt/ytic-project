@@ -3,6 +3,23 @@
 @use './variable';
 @use './animation';
 
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+  .menu-enter-active  {
+    animation: openMenu 0.25s ease-in;
+  }
+
+  .menu-leave-active {
+    animation: closeMenu 0.25s ease-out;
+  }
+
+
+
 body {
     background-image: url("../images/mobile_background.jpg");
     background-size: cover;
@@ -17,6 +34,7 @@ a {
 main {
     display:flex;
     padding: variable.$gutter;
+    position:relative;
   }
 
 @media (min-width:1024px){
@@ -35,6 +53,7 @@ main {
     background-color: white;
     border: variable.$black-border;
     text-align:left;
+    animation: componentAppear 1.5s linear forwards;
 
     img {
         display:block;
