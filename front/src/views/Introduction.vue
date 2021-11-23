@@ -11,7 +11,7 @@
 
         <div class="introduction__entry">
             <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
-            <router-link :to="{ name: 'projects-list' }">
+            <router-link :to="{ name: 'Liste des projets' }">
                 <button class="introduction__button layer" data-speed="0.25" type="button"><span>4</span> Entrer <span>3</span></button>
             </router-link>
         </div>
@@ -58,6 +58,7 @@ export default {
     overflow: hidden;
     position:relative;
     height:100vh;
+    padding:0px;
     display: flex;
     align-items: center;
 
@@ -216,6 +217,7 @@ export default {
             position: absolute;
             bottom:0;
             animation: cloud2 9s linear infinite;
+            z-index: -1;
         }
     }
 

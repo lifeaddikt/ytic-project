@@ -1,7 +1,8 @@
 <template>
     <section class="menu">
+        <EmailModal :modalOn="modalOn" @modalOff="setModal"/>
         <header class="menu__header">
-            <router-link :to="{ name: 'introduction' }">
+            <router-link :to="{ name: 'Accueil' }">
                 <img draggable="false" src="../assets/images/ytichead.png" alt="ytic-avatar.jpeg" class="menu__header__image">
             </router-link>
             <p>Sara Laville aka Ytic</p>
@@ -12,10 +13,10 @@
         <transition name="menu">
             <nav class="menu__navigation" v-if="!isMobile || isMobile && isOpen">
                 <ul>
-                    <router-link :to="{ name: 'informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
-                    <router-link :to="{ name: 'projects-list' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
-                    <router-link :to="{ name: 'musics-list' }" @click="isOpen = !isOpen"><li>Musiques</li></router-link>
-                    <li>Portfolio</li>
+                    <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
+                    <router-link :to="{ name: 'Liste des projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
+                    <router-link :to="{ name: 'Musiques' }" @click="isOpen = !isOpen"><li>Musiques</li></router-link>
+                    <a href="./portfolio.pdf" target="_blank"><li>Portfolio</li></a>
                 </ul>
             </nav>
         </transition>
@@ -25,7 +26,7 @@
             <ul>
                 <li><a href="https://www.instagram.com/yticsara/" target="_blank"><img draggable="false" src="../assets/images/instagram.png" alt="logo instagram"/></a></li>
                 <li><a href="https://soundcloud.com/sara-ytic" target="_blank"><img draggable="false" src="../assets/images/soundcloud.png" alt="logo instagram"/></a></li>
-                <li><img draggable="false" src="../assets/images/mail.png" alt="logo instagram"/></li>
+                <li @click="modalOn= !modalOn"><img draggable="false" src="../assets/images/mail.png" alt="logo instagram"/></li>
             </ul>
         </nav>
 
@@ -41,12 +42,19 @@
 
 
 <script>
+import EmailModal from '../components/EmailModal.vue';
+
 export default {
+
+    components : {
+        EmailModal,
+    },
 
     data(){
         return {
             isOpen: false,
             isMobile: false,
+            modalOn: false,
         }
     },
 
@@ -57,6 +65,9 @@ export default {
     },
 
     methods:{
+        setModal(){
+            this.modalOn = !this.modalOn;
+        },
     },
 
     computed : {
@@ -78,32 +89,45 @@ export default {
 
 .menu {
 
-    margin-right:variable.$big-gutter;
+    margin-right:variable.$gutter;
     display:flex;
     flex-direction: column;
     min-width: 165px;
-    height:calc(100vh - 2rem);
+    height:calc(100vh - 1rem);
     z-index:3;
 
-    @media (max-width:1024px){
+    @media (max-width:1025px){
         position:fixed;
         bottom:variable.$gutter;
+        left:variable.$gutter;
         height:auto;
         display:block;
         width:30%;
         margin-right:0;
     }
 
+    @media (min-width:1500px){
+        min-width:175px;
+        margin-left:1.5rem;
+        max-height:94vh;
+    }
+    
+
+    @media (max-width:570px){
+        left:variable.$small-gutter;
+    }
+
     &__burger {
         display:none;
+        box-shadow: variable.$small-shadow;
 
-        @media (max-width:1024px){
+        @media (max-width:1025px){
             display:flex;
             align-items: center;
             justify-content: center;
             position:fixed;
             bottom:variable.$gutter;
-            right:21px;
+            right:variable.$gutter;
             background-color: variable.$light-pink;
             border: variable.$menu-border;
             height:45px;
@@ -118,8 +142,9 @@ export default {
         border: variable.$menu-border;
         padding: variable.$tiny-gutter;
         margin-bottom: variable.$small-gutter;
+        box-shadow: variable.$small-shadow;
 
-        @media (max-width:1024px){
+        @media (max-width:1025px){
         display:none;
     }
 
@@ -131,6 +156,7 @@ export default {
     }
 
     &__navigation {
+
         ul {
             display:flex;
             flex-direction: column;
@@ -141,37 +167,56 @@ export default {
             background-color: variable.$light-pink;
             border: variable.$menu-border;
             padding: variable.$small-gutter;
+            box-shadow: variable.$small-shadow;
+
+            &:hover{
+             box-shadow: variable.$inner-shadow;
+            }
         }
 
-        @media (max-width:1024px){
+        @media (max-width:1025px){
         position:fixed;
-        bottom:10%;
-        background-color: variable.$light-pink;
-        width:90%;
+        bottom:7.5%;
+        right:50%;
+        transform:translate(50%, 0);
+        width:100%;
         padding: variable.$small-gutter;
-        border: variable.$menu-border;
 
         ul {
             display:grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap:variable.$gutter;
-
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap:0px;
+            grid-row-gap:7.5px;
+            justify-content: center;
             li {
-                border: none;
+                border: variable.$menu-border;
+                display:inline-block;
+                min-width:155px;
             }
 
-            li:last-of-type {
-                grid-column-start: 2;
+        }
+    }
+
+    @media (max-height:568px){
+        bottom:10%;
+        ul {
+            li {
+                min-width:150px;
             }
         }
     }
     }
+
 
     &__social-media {
         margin-top:auto;
         ul {
             display:flex;
             justify-content: space-between;
+
+            @media (min-width:768px) and (max-width:1024px){
+                max-width:175px;
+            }
         }
 
         li {
@@ -183,8 +228,19 @@ export default {
             height:45px;
             width:45px;
             padding:variable.$small-gutter;
+            box-shadow: variable.$small-shadow;
 
-            @media (max-width:1024px){
+            &:hover{
+             box-shadow: variable.$inner-shadow;
+            }
+
+            a {
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            @media (max-width:1025px){
                 margin-left:5px;
     }
         }

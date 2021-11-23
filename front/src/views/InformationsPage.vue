@@ -2,19 +2,21 @@
 
     <main>
         <Menu />
-        <transition name="fade" appear>
-            <section class="page">
-                <h1>{{title}}</h1>
-                <div v-html="content">
-                </div>
+        <Loader v-if="loading"/>
+            <section v-if="!loading" class="page">
+                    <div class="page-appear" v-if="!loading">
+                        <h1>{{title}}</h1>
+                        <div v-html="content">
+                        </div>
+                    </div>
             </section>
-        </transition>
     </main>
     
 </template>
 
 <script>
 import Menu from '../components/Menu.vue';
+import Loader from '../components/Loader.vue';
 import pageService from '../services/pageService.js';
 
 export default {
@@ -22,18 +24,19 @@ export default {
     data(){
         return {
             title:'',
-            content:''
+            content:'',
+            loading:true,
         }
 
     },
 
     components: {
         Menu,
+        Loader,
   },
 
     created(){
         this.loadPage();
-
     },
 
     methods : {
@@ -41,6 +44,11 @@ export default {
             const allDatas = await pageService.loadPage();
             this.title = allDatas.title.rendered;
             this.content = allDatas.content.rendered;
+            this.loaded();
+        },
+
+        loaded(){
+            this.loading = false;
         },
     }
 
@@ -51,9 +59,5 @@ export default {
 
 <style scoped lang="scss">
 // Done in main.scss 
-
-h1 {
-    margin-top:0;
-}
 
 </style>

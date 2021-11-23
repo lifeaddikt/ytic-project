@@ -16,27 +16,27 @@ const routes = [
     // IMPORTANT VUEJS ROUTER configuration d'une route
     path: '/',  // configuration de l'url à "match"
     component: Introduction, // composant a appeler (executer) lors que la route est valide
-    name: 'introduction', // nom de la route
+    name: 'Accueil', // nom de la route
   },
   {
     path: '/projets',
     component: ProjectList,
-    name: 'projects-list'
+    name: 'Liste des projets',
   },
   {
     path: '/projet/:slug',
     component: ProjectPage,
-    name: 'project',
+    name: 'Projet',
   },
   {
     path: '/infos',
     component: InformationsPage,
-    name: 'informations',
+    name: 'Informations',
   },
   {
     path: '/musiques',
     component: MusicList,
-    name: 'musics-list',
+    name: 'Musiques',
   },
 ]
 
@@ -44,6 +44,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`
+  next();
 })
 
 export default router

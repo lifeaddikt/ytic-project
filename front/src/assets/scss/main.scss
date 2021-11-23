@@ -3,22 +3,9 @@
 @use './variable';
 @use './animation';
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-  }
-
-  .menu-enter-active  {
-    animation: openMenu 0.25s ease-in;
-  }
-
-  .menu-leave-active {
-    animation: closeMenu 0.25s ease-out;
-  }
-
-
+html {
+    cursor: url("../images/curseur.png") 15 30, auto;
+}
 
 body {
     background-image: url("../images/mobile_background.jpg");
@@ -33,14 +20,25 @@ a {
 
 main {
     display:flex;
-    padding: variable.$gutter;
+    justify-content: center;
+    padding: variable.$small-gutter;
     position:relative;
+    overflow: hidden;
+
+    @media (max-height:600px){
+        padding: variable.$tiny-gutter;
+    }
+
+    @media (min-width:1500px){
+        padding: 1.75rem;
+    }
   }
 
 @media (min-width:1024px){
     body {
-        background-image: url("../images/desktop_background.jpg");
+        background-image:url('../images/desktop_background.jpg');
         background-size: cover;
+        
     }
 }
 
@@ -48,21 +46,228 @@ main {
 /// Informations page 
 
 .page {
-    
-    padding: variable.$small-gutter;
+
+    padding: variable.$gutter;
     background-color: white;
     border: variable.$black-border;
     text-align:left;
-    animation: componentAppear 1.5s linear forwards;
+    word-break: break-word;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
 
-    img {
-        display:block;
-        max-width:100%;
-        margin:auto;
+    &::-webkit-scrollbar {
+        display: none;
+        width:0;
+        height:0;
+        -webkit-appearance: none;
+        width: 0;
+        height: 0;
+    }
+
+    @media (min-width:768px){
+        font-size: 20px;
+    }
+
+    div:last-of-type {
+        margin-bottom:40px;
     }
 
     @media (min-width:1024px){
-        padding: variable.$gutter;
+        margin:0 variable.$gutter;
+        height:98vh;
+        overflow: scroll;
+        padding:1rem 3rem;
+
+        div:last-of-type {
+            margin-bottom:0;
+        }
+    }
+
+    @media (min-width:1500px){
+        margin:0 2rem;
+        height:94vh;
+    }
+
+    blockquote {
+        p {
+            font-style: italic;
+            &::before {
+                content: '"';
+            }
+            &::after {
+                content: '"';
+            }
+        }
+    }
+
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    //// Style des classes WP
+
+    /// Alignement du texte 
+    .has-text-align-center {
+        text-align:center;
+    }
+
+    .has-text-align-right {
+        text-align:right;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    strong {
+        font-style: bold;
+    }
+
+    /// Youtube & Soundcloud
+
+    iframe {
+        width:100%;
+        height:200px;
+
+        @media (min-width:768px){
+            min-width:500px;
+            height:300px;
+        }
+
+        @media (min-width:1025px){
+            min-width:700px;
+            height:400px;
+        }
+    }
+
+    /// Image et son
+
+    .wp-block-audio, .wp-block-image {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: variable.$gutter 0;
+
+        img {
+            margin-bottom:variable.$small-gutter;
+        }
+    }
+
+    .wp-block-separator {
+        max-width:350px;
+    }
+
+    /// Bloc contenu + text
+
+    .wp-block-media-text {
+        margin: variable.$gutter 0;
+
+        @media (min-width:550px){
+            display:flex;
+            justify-content: center;
+
+            .wp-block-media-text__content {
+                margin-left:variable.$gutter;
+            }
+
+            .has-media-on-the-right {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    /// pictures gallery
+
+    .wp-block-gallery {
+        margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    }
+
+    .blocks-gallery-grid {
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap:20px;
+        justify-content: center;
+        align-items: center;
+
+
+        li {
+            margin-bottom:0;
+            &:before {
+                content:'';
+            }
+
+            img {
+                margin-bottom:0;
+            }
+        }
+    }
+
+    /// Téléchargement fichier 
+
+    .wp-block-file {
+        margin:variable.$gutter;
+
+        a {
+            text-decoration: none;
+        }
+
+        &__button {
+            border:1px solid black;
+            padding:variable.$small-gutter;
+            margin-left:variable.$gutter;
+            background-color: #efefef;
+
+            &:hover {
+                background-color: #e6e4e4;
+            }
+        }
+    }
+
+
+    &-appear {
+        animation: componentAppear 1.5s linear forwards;
+    }
+
+    @media (min-width:1024px){
+        width:100%;
+    }
+
+    img{
+        display:block;
+        width:100%;
+        height:auto;
+        max-width:375px;
+        max-height:375px;
+        margin-bottom:variable.$gutter;
+
+        @media (min-width:768px){
+            margin-bottom:variable.$big-gutter;
+            max-width:475px;
+            max-height:475px;
+        }
+
+        @media (min-width:1024px){
+            max-width:525px;
+            max-height:525px;
+        }
+
+        @media (min-width:1500px){
+            max-width:575px;
+            max-height:575px;
+        }
+    }
+
+    figcaption {
+        font-style: italic;
+        text-align: center;
     }
 
     h1, h2 {
@@ -70,15 +275,19 @@ main {
     }
 
     p, li {
-        margin-bottom:variable.$small-gutter;
+        margin-bottom:variable.$gutter;
     }
 
     h1 {
         font-weight: bold;
         font-size: 25px;
-        @media (min-width:1024px){
-            font-size:35px;
+        @media (min-width:1500px){
+            margin:1.75rem 0;
         }
+        @media (min-width:768px){
+            font-size:40px;
+        }
+        
     }
 
     h2 {
@@ -104,3 +313,20 @@ main {
     }
 
 }
+
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+  .menu-enter-active  {
+    animation: openMenu 0.25s ease-in;
+  }
+
+  .menu-leave-active {
+    animation: closeMenu 0.25s ease-out;
+  }
+

@@ -92,13 +92,13 @@
     from {
         left:0;
     } to {
-        left:-20px;
+        left:-52.5px;
     }
 }
 
 @keyframes moveRight {
     from {
-        left:-20px;
+        left:-52.5px;
     } to {
         left:0px;
     }
@@ -125,12 +125,26 @@
     }
 }
 
-// Apparition composant 
+// Appear component
 
 @keyframes componentAppear {
     from {
         opacity: 0;
     } to {
         opacity:1;
+    }
+}
+
+// Link Animatons 
+
+@keyframes shining {
+    0% {
+        text-shadow: #fb3cce 0 0 5px;
+    }
+    50% {
+        text-shadow: #fb3cce 0 0 20px;
+    }
+    100% {
+        text-shadow: #fb3cce 0 0 4px;
     }
 }

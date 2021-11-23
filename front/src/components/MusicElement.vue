@@ -9,12 +9,12 @@
     </div>
 
     <div class="music-element__description">
-        <p>{{title}}</p>
-        <p>{{artiste}}</p>
-        <p>{{production}}</p>
+        <p v-html="title"></p>
+        <p v-html="artiste"></p>
+        <p v-html="production"></p>
         <p>{{type}}</p>
         <div class="music-element__audio-player">
-            <audio :id="id" @timeupdate="timeSynchronisation" src="../assets/images/sound.mp3" preload=”metadata” loop />
+            <audio :id="id" @timeupdate="timeSynchronisation" :src="src" preload=”metadata” loop />
             <button v-show="!isPlaying" @click="playMusic" class="music-element__audio-player-button"><i class="fas fa-play"></i></button>
             <button v-show="isPlaying" @click="playMusic" class="music-element__audio-player-button"><i class="fas fa-pause"></i></button>
             <span class="music-element__audio-currentTime">{{currentTime}}</span>
@@ -32,7 +32,6 @@ export default {
     mounted(){
 
         this.loadAudioContent();
-        console.log(this.imageSrc);
     },
 
     data(){
@@ -87,7 +86,6 @@ export default {
             const audio = document.getElementById(this.id);
 
             audio.addEventListener('loadedmetadata', () => {
-        console.log(audio.duration);
             this.audioDuration = this.calculateTime(audio.duration);
             this.maxDuration = Math.floor(audio.duration);
             });
@@ -123,6 +121,17 @@ export default {
     align-items:center;
     justify-content: center;
 
+    @media (min-width:1024px){
+        min-width:400px;
+    }
+
+    @media (min-width:768px){
+        width:600px;
+        height:200px;
+    }
+
+
+
     &__audio-player {
         display:flex;
         align-items:center;
@@ -134,15 +143,13 @@ export default {
         }
 
         &-button {
+            cursor: pointer;
             background-color: transparent;
             border:none;
-        }
-    }
 
-    img {
-        width:110px;
-        @media (min-width:768px){
-            width:125px;
+            @media (min-width:1024px){
+            padding:variable.$small-gutter;
+        }
         }
     }
 
@@ -152,9 +159,33 @@ export default {
 
         &__CD {
             animation:turn 2s infinite linear;
-            left:-20px;
+            left:-52.5px;
+            top:7px;
             position:absolute;
             z-index: -1;
+            display:none;
+
+            @media (min-width:768px){
+                display:block;
+                width:135px;
+        }
+
+
+        }
+        &__cover {
+            box-shadow: variable.$music-shadow;
+            width:90px;
+
+            @media (min-width:350px){
+                width:100px;
+            }
+            @media (min-width:400px){
+                width:110px;
+            }
+
+            @media (min-width:768px){
+                    width:150px;
+    }
         }
     }
 
@@ -181,7 +212,8 @@ export default {
 }
 
 input[type=range] {
-    width:125px;
+    width:60%;
+    min-width:130px;
     -webkit-appearance: none;
     appearance: none;
     height:2px;

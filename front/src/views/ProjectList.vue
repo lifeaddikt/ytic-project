@@ -1,10 +1,11 @@
 <template>
     <main>
         <Menu />
-        <section class="project-list">
+        <Loader v-if="isLoading" />
+        <section v-if="!isLoading" class="project-list">
             <ul>
                 <li v-for="(item, index) in projectsList" :key="item.project.id">
-                    <router-link :to="{ name: 'project', params: { slug: item.project.slug } }" >
+                    <router-link :to="{ name: 'Projet', params: { slug: item.project.slug } }" >
                     ({{index + 1}}) {{item.project.title.rendered}}
                     </router-link>
                     <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
@@ -18,12 +19,15 @@
 
 <script>
 import Menu from '../components/Menu.vue';
+import Loader from '../components/Loader.vue';
+
 import projectService from '../services/projectService.js';
 
 export default {
 
     components: {
         Menu,
+        Loader
   },
 
     created(){
@@ -35,16 +39,18 @@ export default {
         return {
             projectsList: [],
             position:{
-                first:['left:10%; top:20%;', 'top:5%; right:10%;', 'bottom:0; right:10%;'],
-                second:['right:10%; bottom:20%;', 'left:10%; bottom:20%;', 'top:20%; left:10%;']
+                first:['left:10%; top:20%;', 'top:5%; left:10%;', 'bottom:10%; left:10%;'],
+                second:['right:15%; bottom:22.5%;', 'right:10%; bottom:20%;', 'top:7.5%; right:10%;']
             },
+            isLoading: true,
         }
     },
 
     methods : {
         async loadProjects(){
             const list = await projectService.loadProjects();
-            this.projectsList = list.reverse().map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
+            this.projectsList = list.map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
+            this.isLoading = false;
         },
 
         randomPositionIndex(){
@@ -60,10 +66,6 @@ export default {
 
         },
     },
-
-    computed : {
-
-    },
     
 }
 </script>
@@ -74,14 +76,34 @@ export default {
 
 .project-list {
     animation: componentAppear 1.5s linear forwards;
-    min-height:calc(100vh - 2rem);
+    height:calc(100vh - 2rem);
     width:100%;
     overflow:hidden;
     text-align: left;
-    font-size: 18px;
+    font-size: 10px;
     font-weight: bold;
-    padding-top:4rem;
+    padding-top:1rem;
     position:relative;
+
+    @media (min-width:1500px){
+        max-height:94vh;
+        padding-right:0;
+        margin-left:2rem;
+    }
+
+    @media(min-height:600px){
+        font-size: 20px;
+        padding-top:4rem;
+    }
+
+    a {
+        &:hover {
+            color:white;
+            animation : shining 2s infinite;
+        }
+    }
+
+    
 
     img {
         z-index: -1;
@@ -90,42 +112,39 @@ export default {
         max-width: 500px;
         max-height:400px;
         position:absolute;
+
+        @media (min-width:1500px){
+            max-width: 600px;
+            max-height:450px;
+        }
     }
 
-    @media (min-width:1024px){
+    @media (min-width:1025px){
         padding-top:0rem;
-        font-weight: normal;
-        font-size:35px;
         display: flex;
         align-items: flex-end;
     }
     
 
     ul {
-        @media (min-width:1024px){
+        @media (min-width:1025px){
             display:inline;
     }
     }
     
     li {
         margin-bottom: variable.$small-gutter;
-        @media (min-width:1024px){
-            cursor: pointer;
-            white-space: normal;
-            word-wrap: break-all;
-            display:inline;
+        font-weight:normal;
+        font-size:32px;
+        @media (min-width:1025px){
+            display:inline-block;
             margin: variable.$tiny-gutter variable.$tiny-gutter 0 0;
-            &:hover {
-                color:variable.$light-pink;
-            }
+            font-weight:normal;
+            font-size:50px;
             &:hover img {
                 display:block;
-                animation: projectAppear 1.5s ease-in forwards;
+                animation: projectAppear .75s ease-in forwards;
             }
-    }
-
-    li:hover {
-        color:red;
     }
     }
 }
