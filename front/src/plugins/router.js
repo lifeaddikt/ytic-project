@@ -8,6 +8,7 @@ import ProjectList from '../views/ProjectList.vue';
 import MusicList from '../views/MusicList.vue';
 import ProjectPage from '../views/ProjectPage.vue';
 import InformationsPage from '../views/InformationsPage.vue';
+import NotFound from '../views/NotFound.vue';
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,15 @@ const routes = [
     component: MusicList,
     name: 'Musiques',
   },
+  {
+    path: '/404',
+    component: NotFound,
+    name: 'Error 404',
+   },  
+  {
+    path: '*',
+    redirect: '/404'
+   },  
 ]
 
 const router = new VueRouter({

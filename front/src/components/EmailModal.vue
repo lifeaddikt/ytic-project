@@ -59,15 +59,13 @@ export default {
 
         startDrag(e){
              e.stopPropagation();
+             console.log(window.y, e.y);
             const modal = e.currentTarget;
             this.dragValue = modal;
         },
         changeModalPosition(e){
              e.stopPropagation();
             if(this.dragValue !== null){
-
-                console.log(this.dragValue.offsetHeight);
-
       
             this.dragValue.style.top = e.y + "px";
             this.dragValue.style.left = e.x + "px";
