@@ -24,4 +24,5 @@ content/themes/*
 
 content/plugins/*
 !content/plugins/
+!/content/plugins/ytic
 #!/content/plugins/custom_plugin
