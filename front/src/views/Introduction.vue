@@ -7,16 +7,16 @@
         <div class="introduction__shine fifth layer" data-speed="4"></div>
         <div class="introduction__shine sixth layer" data-speed="2"></div>
 
-        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
+        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg" loading="lazy">
 
         <div class="introduction__entry">
             <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
             <router-link :to="{ name: 'Liste des projets' }">
-                <button class="introduction__button layer" data-speed="0.25" type="button"><span>4</span> Entrer <span>3</span></button>
+                <button class="introduction__button layer" data-speed="0.25" type="button"><span><i class="fas fa-caret-right"></i></span> Entrer <span><i class="fas fa-caret-left"></i></span></button>
             </router-link>
         </div>
 
-        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
+        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg" loading="lazy">
     </main>
 </template>
 
@@ -30,7 +30,6 @@ export default {
     mounted(){
         const introduction = document.querySelector('.introduction');
         introduction.addEventListener('mousemove', this.parallax);
-        console.log(this.parallax);
     },
     methods: {
         parallax(e){
@@ -154,12 +153,17 @@ export default {
         background-color: variable.$light-pink;
         border: variable.$normal-border;
         padding:variable.$small-gutter;
+        box-shadow: variable.$tiny-shadow;
         font-size:18px;
         cursor: pointer;
         z-index: 1;
 
+        &:hover{
+             box-shadow: variable.$inner-shadow;
+            }
+
         span {
-            font-family: webdings;
+            padding-right:.15rem;
             color: variable.$hard-pink;
             display:inline-block;
         }

@@ -15,7 +15,7 @@
                 <ul>
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
                     <router-link :to="{ name: 'Liste des projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
-                    <router-link :to="{ name: 'Musiques' }" @click="isOpen = !isOpen"><li>Musiques</li></router-link>
+                    <router-link :to="{ name: 'Musiques' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
                     <a :href="`${publicPath}portfolio.pdf`" target="_blank"><li>Portfolio</li></a>
                     <a href="https://sarayticshop.bigcartel.com/" target="_blank" class="shop"><li>Shop</li></a>
                 </ul>
@@ -62,7 +62,7 @@ export default {
 
     created(){
 
-        window.screen.width < 1024 ? this.isMobile = true : this.isMobile = false;
+        window.matchMedia("only screen and (max-width: 760px)").matches ? this.isMobile = true : this.isMobile = false;
 
     },
 
@@ -122,6 +122,7 @@ export default {
     &__burger {
         display:none;
         box-shadow: variable.$small-shadow;
+
 
         @media (max-width:1025px){
             display:flex;
@@ -187,7 +188,7 @@ export default {
         ul {
             display:grid;
             grid-template-columns: 1fr 1fr;
-            grid-column-gap:0px;
+            grid-column-gap:7.5px;
             grid-row-gap:7.5px;
             justify-content: center;
 

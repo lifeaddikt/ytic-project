@@ -29,8 +29,6 @@ export default {
         const slug = this.$route.params.slug;
         const datas = await projectService.loadProject(slug);
 
-        console.log(datas);
-
         this.title = datas.title.rendered;
         this.date = datas.acf.date;
         this.imageAlt = datas._embedded['wp:featuredmedia'][0].alt_text;

@@ -1,6 +1,6 @@
 <template>
 
-    <main class="music-page">
+    <main>
         <Menu />
         <Loader v-if="isLoading" />
         <transition name="fade">
@@ -75,6 +75,7 @@ export default {
         margin: 0 auto;
         width:100%;
         grid-template-columns: 1fr 1fr;
+        justify-content: flex-end;
     }
 
     @media (min-width:1500px){

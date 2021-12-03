@@ -2,7 +2,7 @@
 
 <article class="music-element">
     <div class="music-element__visual">
-        <img class="music-element__visual__cover" :src="imageSrc" />
+        <img loading="lazy" class="music-element__visual__cover" :src="imageSrc" />
         <transition name="play">
         <img v-if="isPlaying" src="../assets/images/CD.png" class="music-element__visual__CD" />
         </transition>
@@ -126,7 +126,6 @@ export default {
     }
 
     @media (min-width:768px){
-        width:600px;
         height:200px;
     }
 

@@ -11,6 +11,7 @@ body {
     background-image: url("../images/mobile_background.jpg");
     background-size: cover;
     position:relative;
+    z-index:0;
 }
 
 a {
@@ -36,8 +37,9 @@ main {
 
 @media (min-width:1024px){
     body {
-        background-image:url('../images/desktop_background.jpg');
+        background-image: url("../images/desktop_background.jpg");
         background-size: cover;
+        background-attachment:fixed;
         
     }
 }
@@ -71,7 +73,7 @@ main {
     }
 
     div:last-of-type {
-        margin-bottom:40px;
+        margin-bottom:1.75rem;
     }
 
     @media (min-width:1024px){
@@ -270,8 +272,15 @@ main {
         text-align: center;
     }
 
+
     h1, h2 {
-        margin:variable.$big-gutter 0;
+        margin:variable.$gutter 0;
+    }
+
+    @media (min-width:1025px){
+        h1, h2 {
+            margin:variable.$big-gutter 0;
+        } 
     }
 
     p, li {

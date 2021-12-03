@@ -59,7 +59,6 @@ export default {
 
         startDrag(e){
              e.stopPropagation();
-             console.log(window.y, e.y);
             const modal = e.currentTarget;
             this.dragValue = modal;
         },

@@ -15,7 +15,6 @@ const mailService = {
             console.log(error);
             return false;
         });
-        console.log(response.data);
         return response.data;
     },
 

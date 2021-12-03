@@ -17,7 +17,7 @@ export default {
 .loader {
 
     width:100%;
-    min-width:85vw;
+    min-width:84.5vw;
     display:flex;
     justify-content: center;
     align-items: center;

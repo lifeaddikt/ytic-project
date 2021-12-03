@@ -6,7 +6,6 @@ const musicService = {
 
     async loadMusics(){
         const response = await axios.get(`${musicService.baseUri}/music?_embed=true&per_page=100`);
-        console.log(response.data);
         return response.data;
     },
 

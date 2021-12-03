@@ -46,10 +46,10 @@ class Api
         $mail = $request->get_param('mail');
         $content = $request->get_param('content');
 
-        $message = 'Nouveau message de : ' . $name . "/n Contact : " . $mail . "/n Message : '/n" . $content;
+        $message = 'Nouveau message de : ' . $name . "<br> Contact : " . $mail . "<br> Message : '<br>" . $content;
 
 
-        $to = 'victor.paumier@neuf.fr';
+        $to = 'sara.ytic.officiel@gmail.com';
         $subject = 'Nouveau message de Ytic Blogz';
         $headers[] = 'From: Ytic<wordpress@ytic.com>';
 

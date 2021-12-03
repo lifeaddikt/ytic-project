@@ -25,4 +25,7 @@ content/themes/*
 content/plugins/*
 !content/plugins/
 !content/plugins/ytic
+!content/plugins/acf-to-rest-api
+!content/plugins/advanced-custom-fields
+!content/plugins/custom-post-type-ui
 #!/content/plugins/custom_plugin

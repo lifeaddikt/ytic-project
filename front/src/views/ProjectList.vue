@@ -8,8 +8,8 @@
                     <router-link :to="{ name: 'Projet', params: { slug: item.project.slug } }" >
                     ({{index + 1}}) {{item.project.title.rendered}}
                     </router-link>
-                    <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
-                    <img v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
+                    <img loading="lazy" v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
+                    <img loading="lazy" v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
                 </li>
             </ul>
         </section>
@@ -49,6 +49,7 @@ export default {
     methods : {
         async loadProjects(){
             const list = await projectService.loadProjects();
+            console.log(list);
             this.projectsList = list.map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
             this.isLoading = false;
         },
@@ -78,12 +79,17 @@ export default {
     animation: componentAppear 1.5s linear forwards;
     height:calc(100vh - 1rem);
     width:100%;
-    overflow:hidden;
+    overflow:scroll;
     text-align: left;
     font-size: 10px;
     font-weight: bold;
     padding-top:1rem;
     position:relative;
+    padding-bottom:2.75rem;
+
+    @media (min-width:1024px){
+        overflow:hidden;
+    }
 
     @media (min-width:1500px){
         max-height:94vh;
@@ -92,6 +98,7 @@ export default {
     }
 
     @media(min-height:600px){
+        padding-bottom:0;
         font-size: 20px;
         padding-top:4rem;
     }
