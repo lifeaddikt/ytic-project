@@ -8,8 +8,8 @@
                     <router-link :to="{ name: 'Projet', params: { slug: item.project.slug } }" >
                     ({{index + 1}}) {{item.project.title.rendered}}
                     </router-link>
-                    <img loading="lazy" v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
-                    <img loading="lazy" v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
+                    <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
+                    <img v-if="item.project.acf.second_picture" :src="item.project.acf.second_picture.url" :alt="altPicture(item.project)" :style="position.second[item.positionIndex]"/>
                 </li>
             </ul>
         </section>
@@ -49,9 +49,11 @@ export default {
     methods : {
         async loadProjects(){
             const list = await projectService.loadProjects();
-            console.log(list);
             this.projectsList = list.map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
             this.isLoading = false;
+            this.projectsList.forEach(item => {
+                console.log(item.project.acf);
+            });
         },
 
         randomPositionIndex(){

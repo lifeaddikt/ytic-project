@@ -37,7 +37,7 @@ const routes = [
   {
     path: '/musiques',
     component: MusicList,
-    name: 'Musiques',
+    name: 'Musique',
   },
   {
     path: '/404',
@@ -53,7 +53,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
 
 router.beforeEach((to, from, next) => {

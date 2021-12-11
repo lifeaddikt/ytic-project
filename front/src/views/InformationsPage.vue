@@ -60,4 +60,5 @@ export default {
 <style scoped lang="scss">
 // Done in main.scss 
 
+
 </style>

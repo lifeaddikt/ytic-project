@@ -7,16 +7,16 @@
         <div class="introduction__shine fifth layer" data-speed="4"></div>
         <div class="introduction__shine sixth layer" data-speed="2"></div>
 
-        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg" loading="lazy">
+        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
 
         <div class="introduction__entry">
-            <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/title.png" alt="Sara Ytic">
+            <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/new-title.png" alt="Sara Ytic">
             <router-link :to="{ name: 'Liste des projets' }">
                 <button class="introduction__button layer" data-speed="0.25" type="button"><span><i class="fas fa-caret-right"></i></span> Entrer <span><i class="fas fa-caret-left"></i></span></button>
             </router-link>
         </div>
 
-        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg" loading="lazy">
+        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
     </main>
 </template>
 
@@ -156,7 +156,7 @@ export default {
         box-shadow: variable.$tiny-shadow;
         font-size:18px;
         cursor: pointer;
-        z-index: 1;
+        z-index: 10;
 
         &:hover{
              box-shadow: variable.$inner-shadow;
@@ -183,12 +183,14 @@ export default {
             position: absolute;
             top:0;
             animation: cloud 10s linear infinite;
+            width:250px;
         }
 
         &-2 {
             position: absolute;
             bottom:0;
             animation: cloud2 8s linear infinite;
+            width:250px;
         }
     }
 
@@ -209,19 +211,24 @@ export default {
         }
 
             &__cloud {
-                max-width: 200px;
                 &-1 {
             position: absolute;
             top:0;
             left:-100px;
             animation: cloud 12s linear infinite;
+            width:500px;
         }
 
             &-2 {
             position: absolute;
             bottom:0;
             animation: cloud2 9s linear infinite;
-            z-index: -1;
+            z-index: -2;
+            width:500px;
+
+            @media (min-width:1500px){
+                width:600px;
+            }
         }
     }
 

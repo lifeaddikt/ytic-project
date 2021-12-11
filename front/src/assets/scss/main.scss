@@ -68,12 +68,9 @@ main {
         height: 0;
     }
 
+
     @media (min-width:768px){
         font-size: 20px;
-    }
-
-    div:last-of-type {
-        margin-bottom:1.75rem;
     }
 
     @media (min-width:1024px){
@@ -132,18 +129,33 @@ main {
 
     iframe {
         width:100%;
+        max-width:500px;
         height:200px;
+        margin:0 auto variable.$small-gutter auto;
+
+        @media (min-width:400px){
+            height:295px;
+        }
 
         @media (min-width:768px){
-            min-width:500px;
-            height:300px;
+            width:500px;
+            height:295px;
         }
 
         @media (min-width:1025px){
             min-width:700px;
-            height:400px;
+            height:395px;
+            margin-bottom: 1.75rem;
         }
     }
+
+    .wp-block-embed__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
 
     /// Image et son
 
@@ -152,10 +164,14 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: variable.$gutter 0;
+        margin: variable.$small-gutter 0;
 
         img {
             margin-bottom:variable.$small-gutter;
+
+            @media (min-width:1025px){
+                margin-bottom:1.5rem;
+            }
         }
     }
 
@@ -167,6 +183,10 @@ main {
 
     .wp-block-media-text {
         margin: variable.$gutter 0;
+
+        @media (min-width:1025px){
+            margin-bottom:1.5rem;
+        }
 
         @media (min-width:550px){
             display:flex;
@@ -185,10 +205,14 @@ main {
     /// pictures gallery
 
     .wp-block-gallery {
-        margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+        margin: 0 auto variable.$small-gutter auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @media (min-width : 1025px){
+            margin-bottom:1.75rem;
+        }
 
     }
 
@@ -215,7 +239,14 @@ main {
     /// Téléchargement fichier 
 
     .wp-block-file {
-        margin:variable.$gutter;
+
+        padding:variable.$gutter;
+        display:block;
+
+        @media (min-width:1025px){
+            margin-bottom:1.75rem;
+            padding:variable.$big-gutter 2rem ;
+        }
 
         a {
             text-decoration: none;
@@ -233,6 +264,13 @@ main {
         }
     }
 
+    // spacer 
+
+.wp-block-spacer {
+    height:50px;
+}
+
+/// Y'a un style direct sur le html ? 
 
     &-appear {
         animation: componentAppear 1.5s linear forwards;
@@ -259,6 +297,7 @@ main {
         @media (min-width:1024px){
             max-width:525px;
             max-height:525px;
+            margin-bottom:1.75rem;
         }
 
         @media (min-width:1500px){
@@ -270,6 +309,15 @@ main {
     figcaption {
         font-style: italic;
         text-align: center;
+        font-size: 11px;
+        line-height: normal;
+        margin-top:variable.$small-gutter;
+
+        @media (min-width:1024px){
+            margin-top:variable.$gutter;
+            font-size: 15px;
+            line-height: 20px;
+        }
     }
 
 
@@ -277,14 +325,28 @@ main {
         margin:variable.$gutter 0;
     }
 
-    @media (min-width:1025px){
-        h1, h2 {
-            margin:variable.$big-gutter 0;
-        } 
+    p, li {
+        margin-bottom:variable.$small-gutter;
+        line-height: 22.5px;
+
+        @media (min-width:1025px){
+            line-height: 30px;
+        }
+
+        @media (min-width:1500px){
+            width:92.5%;
+            margin: 0 auto 1.5rem auto;
+        }
     }
 
-    p, li {
-        margin-bottom:variable.$gutter;
+    @media (min-width:1025px){
+        h1, h2 {
+            margin:1.5rem 0;
+        } 
+
+        p, li {
+            margin-bottom:1.5rem;
+        }
     }
 
     h1 {

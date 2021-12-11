@@ -2,7 +2,7 @@
 
 <article class="music-element">
     <div class="music-element__visual">
-        <img loading="lazy" class="music-element__visual__cover" :src="imageSrc" />
+        <img class="music-element__visual__cover" :src="imageSrc" />
         <transition name="play">
         <img v-if="isPlaying" src="../assets/images/CD.png" class="music-element__visual__CD" />
         </transition>

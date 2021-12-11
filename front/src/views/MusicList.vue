@@ -72,6 +72,7 @@ export default {
 }
 
     @media (min-width: 1025px){
+        padding-bottom: 0;
         margin: 0 auto;
         width:100%;
         grid-template-columns: 1fr 1fr;

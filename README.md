@@ -8,3 +8,5 @@ Site de Sara Ytic
  - Terminer la page article 
 
  
+- Problème nuage page accueil
+- Safari qui fait de la merde

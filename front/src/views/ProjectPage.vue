@@ -29,6 +29,8 @@ export default {
         const slug = this.$route.params.slug;
         const datas = await projectService.loadProject(slug);
 
+        console.log(datas);
+
         this.title = datas.title.rendered;
         this.date = datas.acf.date;
         this.imageAlt = datas._embedded['wp:featuredmedia'][0].alt_text;
@@ -74,15 +76,14 @@ export default {
         
         &:first-of-type {
             max-width:750px;
-            max-height:750px;
+            max-height:375px;
 
         @media (min-width:768px){
             margin:0 auto variable.$big-gutter auto;
         }
 
         @media (min-width:1025px){
-            max-width:80%;
-            max-height:800px;
+            max-height:650px;
         }
         }
     }
@@ -109,6 +110,12 @@ export default {
         margin-left:5px;
         font-size: 12px;
         font-style:italic;
+    }
+
+    padding-bottom:60px;
+
+    @media (min-width:1025px){
+        padding-bottom:0px;
     }
 }
 
