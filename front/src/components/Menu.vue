@@ -4,6 +4,7 @@
         <header class="menu__header">
             <router-link :to="{ name: 'Accueil' }">
                 <img draggable="false" src="../assets/images/ytichead.png" alt="ytic-avatar.jpeg" class="menu__header__image">
+                <div class="menu__header__shine"></div>
             </router-link>
             <p>Sara Laville aka Ytic</p>
             <p>{{age}} ans</p>
@@ -14,7 +15,7 @@
             <nav class="menu__navigation" v-if="!isMobile || isMobile && isOpen">
                 <ul>
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
-                    <router-link :to="{ name: 'Liste des projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
+                    <router-link :to="{ name: 'Projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
                     <router-link :to="{ name: 'Musique' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
                     <a :href="`${publicPath}portfolio.pdf`" target="_blank"><li>Portfolio</li></a>
                     <a href="https://sarayticshop.bigcartel.com/" target="_blank" class="shop"><li>Shop</li></a>
@@ -146,15 +147,39 @@ export default {
         padding: variable.$tiny-gutter;
         margin-bottom: variable.$small-gutter;
         box-shadow: variable.$small-shadow;
+        position: relative;
+
+        &__shine {
+            display: none;
+            position:absolute;
+            top:0;
+            left:50%;
+            transform: translate(-50%);
+            -webkit-mask-image: url(../assets/images/zizi.png);
+            -webkit-mask-size:100px 88px; 
+            -webkit-mask-position: 60% 0%;
+            -webkit-mask-repeat: no-repeat;
+            animation: ytic-anim 2s linear infinite;
+            filter: blur(2px);
+            width:120px;
+            height:120px;
+            background-color: #f8f8f8;
+        }
 
         @media (max-width:1025px){
         display:none;
     }
 
         &__image {
-            max-width:75px;
-            max-height:75px;
+            position: relative;
+            max-width:82.5px;
+            max-height:72.6px;
             margin-bottom: variable.$small-gutter;
+            z-index: 4;
+
+            &:hover + .menu__header__shine {
+                display:block;
+            }
         }
     }
 

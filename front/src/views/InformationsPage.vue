@@ -3,7 +3,7 @@
     <main>
         <Menu />
         <Loader v-if="loading"/>
-            <section v-if="!loading" class="page">
+            <section v-if="!loading" class="info page">
                     <div class="page-appear" v-if="!loading">
                         <h1>{{title}}</h1>
                         <div v-html="content">
@@ -60,5 +60,8 @@ export default {
 <style scoped lang="scss">
 // Done in main.scss 
 
+.info {
+    padding-bottom:45px;
+}
 
 </style>

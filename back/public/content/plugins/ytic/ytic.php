@@ -25,5 +25,3 @@ register_deactivation_hook(
 );
 
 $api = new Api();
-
-

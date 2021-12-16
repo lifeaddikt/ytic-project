@@ -1,16 +1,24 @@
 <template>
     <main>
         <Menu />
+        <article v-if="loading" class="page project-page">
         <Loader v-if="loading"/>
+        </article>
         <article v-if="!loading" class="page project-page">
-            <header>
+            <header class="header">
+                <router-link v-if="previousSlug" :to="{ name: 'Projet', params: { slug: previousSlug} }">
+                <span class="header__previous btn"><i class="fas fa-caret-left"></i></span>
+                </router-link>
+                <router-link v-if="nextSlug" :to="{ name: 'Projet', params: { slug: nextSlug} }">
+                <span class="header__next btn"><i class="fas fa-caret-right"></i></span>
+                </router-link>
                 <h1>{{ title }}</h1>
                 <p class="project-page__date">{{date}}</p>
             </header>
-            <div className="project-page__thumbnail">
+            <div class="project-page__thumbnail">
                 <img draggable="false" :src="imageUrl" :alt="imageAlt"/>
             </div>
-            <div v-html="content" className="project-page__content">
+            <div v-html="content" class="project-page__content">
             </div>
 
         </article>
@@ -29,22 +37,41 @@ export default {
         const slug = this.$route.params.slug;
         const datas = await projectService.loadProject(slug);
 
-        console.log(datas);
-
         this.title = datas.title.rendered;
         this.date = datas.acf.date;
         this.imageAlt = datas._embedded['wp:featuredmedia'][0].alt_text;
         this.imageUrl = datas._embedded['wp:featuredmedia'][0].source_url;
         this.content = datas.content.rendered;
 
+        if (datas.next){
+            this.previousSlug = datas.next.slug;
+            console.log(this.previousSlug);
+        }
+
+        if(datas.previous){
+        this.nextSlug = datas.previous.slug;
+        }
+
         this.loading = false;
 
         this.updateTitle();
     },
 
+    updated(){
+        this.setImageUndraggable();
+    },
+
     methods: {
         updateTitle(){
             document.title = `${process.env.VUE_APP_TITLE} - ${this.title}`
+        },
+
+        setImageUndraggable(){
+            const images = document.querySelectorAll('img');
+            
+            images.forEach(image => {
+                image.setAttribute('draggable', false);
+            });
         }
     },
 
@@ -56,6 +83,8 @@ export default {
             imageUrl: '',
             imageAlt: '',
             loading:true,
+            previousSlug:null,
+            nextSlug:null
         }
     },
 
@@ -75,15 +104,16 @@ export default {
     img {
         
         &:first-of-type {
-            max-width:750px;
-            max-height:375px;
 
         @media (min-width:768px){
             margin:0 auto variable.$big-gutter auto;
         }
 
         @media (min-width:1025px){
-            max-height:650px;
+            max-height:600px;
+        }
+        @media (min-width:1500px){
+            max-height:700px;
         }
         }
     }
@@ -92,7 +122,32 @@ export default {
         padding:1rem 5rem;
     }
 
-    header {
+    .header{
+        position: relative;
+        width:100%;
+        text-align: center;
+
+    .btn {
+        position:absolute;
+        top:50%;
+        transform: translate(0, -60%);
+        color: variable.$hard-pink;
+        font-size:20px;
+        cursor: pointer;
+
+        @media (min-width:1024px){
+            font-size:30px;
+        }
+    }
+
+    &__previous {
+        left: - variable.$small-gutter;
+    }
+
+    &__next {
+        right: - variable.$small-gutter;
+    }
+
         @media (min-width:1025px){
             text-align: center;
         }
@@ -112,7 +167,7 @@ export default {
         font-style:italic;
     }
 
-    padding-bottom:60px;
+    padding-bottom:50px;
 
     @media (min-width:1025px){
         padding-bottom:0px;

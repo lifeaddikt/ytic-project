@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/projets',
     component: ProjectList,
-    name: 'Liste des projets',
+    name: 'Projets',
   },
   {
     path: '/projet/:slug',

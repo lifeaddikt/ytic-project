@@ -27,7 +27,7 @@ export default {
             width:500px;
     }
         @media (min-width: 1500px){
-            width:1000px;
+            width:750px;
         }
 }
 

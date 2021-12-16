@@ -55,6 +55,9 @@ export default {
         async sendMail(e){
             e.preventDefault();
            this.formMessage = await mailService.sendMail(this.name, this.mail, this.content);
+           this.name = "";
+           this.content ="";
+           this.mail="";
         },
 
         startDrag(e){

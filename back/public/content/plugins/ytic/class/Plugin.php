@@ -23,12 +23,10 @@ class Plugin
             [$this, 'createMusicTypeCustomTaxonomie']
         );
 
-
     }
 
     public function activate()
     {
-
         wp_insert_term('Reprise', 'music-type');
 
         wp_insert_term('Chanson originale', 'music-type');

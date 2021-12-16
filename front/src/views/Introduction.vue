@@ -11,7 +11,7 @@
 
         <div class="introduction__entry">
             <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/new-title.png" alt="Sara Ytic">
-            <router-link :to="{ name: 'Liste des projets' }">
+            <router-link :to="{ name: 'Projets' }">
                 <button class="introduction__button layer" data-speed="0.25" type="button"><span><i class="fas fa-caret-right"></i></span> Entrer <span><i class="fas fa-caret-left"></i></span></button>
             </router-link>
         </div>
