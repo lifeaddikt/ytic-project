@@ -29,23 +29,16 @@
 <script>
 export default {
 
-    mounted(){
-
-        this.loadAudioContent();
-    },
-
     data(){
         return {
-            isPlaying:false,
+            isPlaying: false,
             audioDuration: "0:00",
             maxDuration: 100,
             currentTime: "0:00",
-            playState: "play",
         }
     },
 
     props: {
-        // recipe: Object,
         title: String,
         artiste: String,
         production: String,
@@ -53,20 +46,33 @@ export default {
         src: String,
         imageSrc: String,
         id:Number,
+        elementIsPlaying:Number
+    },
+
+    watch: { 
+        elementIsPlaying: function() {
+          this.isPlaying = false;
+          const audio = document.getElementById(this.id);
+          audio.pause();
+        }
+    },
+
+    mounted(){
+        this.loadAudioContent();
     },
 
     methods: {
-        playMusic(event){
+       async playMusic(event){
+           await this.$emit('elementIsPlaying');
+
+           if(event.currentTarget.querySelector('i').classList.contains('fa-play')){
+
             this.isPlaying = !this.isPlaying;
             const audio = event.currentTarget.closest('.music-element__audio-player').querySelector('audio');
 
-              if(this.playState === 'play') {
-                audio.play();
-                this.playState = 'pause';
-            } else {
-                audio.pause();
-                this.playState = 'play';
-            }
+            audio.play();
+
+           }
         },
 
         timeSynchronisation(event){
@@ -102,12 +108,8 @@ export default {
             const seconds = Math.floor(secs % 60);
             const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
             return `${minutes}:${returnedSeconds}`;
-    }
+        }
     },
-
-    computed: {
-
-    }
     
 }
 </script>

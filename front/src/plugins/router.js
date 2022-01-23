@@ -35,7 +35,7 @@ const routes = [
     name: 'Informations',
   },
   {
-    path: '/musiques',
+    path: '/musique',
     component: MusicList,
     name: 'Musique',
   },

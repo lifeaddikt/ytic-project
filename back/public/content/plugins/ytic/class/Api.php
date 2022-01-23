@@ -72,7 +72,7 @@ class Api
         $message = 'Nouveau message de : ' . $name . "<br> Contact : " . $mail . "<br> Message : <br>'" . $content . "'";
 
 
-        $to = 'sara.ytic.officiel@gmail.com';
+        $to = 'ytic.sara@gmail.com';
         $subject = 'Nouveau message!!!';
         $headers[] = 'From: Site internet Ytic <wordpress@ytic.com>';
 

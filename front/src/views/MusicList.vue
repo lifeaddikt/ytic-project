@@ -5,7 +5,7 @@
         <Loader v-if="isLoading" />
         <transition name="fade">
         <section class="music-list">
-            <MusicElement v-for="music in musicsList" :key="music.id" :title="music.title.rendered" :artiste="music.acf.artiste" :production="music.acf.production" :date="music.acf.date" :src="music.acf.fichier_audio.url" :id="music.id" :imageSrc="music._embedded['wp:featuredmedia'][0].source_url" :type="music._embedded['wp:term'][0][0].name" />
+            <MusicElement @elementIsPlaying="updatePlaying" v-for="music in musicsList" :elementIsPlaying="elementIsPlaying" :key="music.id" :title="music.title.rendered" :artiste="music.acf.artiste" :production="music.acf.production" :date="music.acf.date" :src="music.acf.fichier_audio.url" :id="music.id" :imageSrc="music._embedded['wp:featuredmedia'][0].source_url" :type="music._embedded['wp:term'][0][0].name" />
         </section>
         </transition>
     </main>
@@ -32,6 +32,7 @@ export default {
       return {
           musicsList: [],
           isLoading: true,
+          elementIsPlaying: 0
       }
   },
 
@@ -46,6 +47,10 @@ export default {
         loaded(){
             this.isLoading = false;
         },
+
+        updatePlaying(){
+            this.elementIsPlaying++;
+        }
   }
     
 }

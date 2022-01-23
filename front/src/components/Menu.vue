@@ -163,7 +163,7 @@ export default {
             filter: blur(2px);
             width:120px;
             height:120px;
-            background-color: #f8f8f8;
+            background-color: #c899f9
         }
 
         @media (max-width:1025px){
