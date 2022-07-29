@@ -137,7 +137,8 @@ export default {
 
     ul {
         @media (min-width:1025px){
-            display:inline;
+            display: flex;
+            flex-wrap: wrap;
     }
     }
     
@@ -146,8 +147,7 @@ export default {
         font-weight:normal;
         font-size:32px;
         @media (min-width:1025px){
-            display:inline-block;
-            margin: variable.$tiny-gutter variable.$tiny-gutter 0 0;
+            margin: variable.$tiny-gutter variable.$gutter 0 0;
             font-weight:normal;
             font-size:50px;
             &:hover img {
