@@ -38,6 +38,7 @@ export default {
     data(){
         return {
             projectsList: [],
+            path: this.$router.currentRoute.name,
             position:{
                 first:['left:10%; top:20%;', 'top:5%; left:10%;', 'bottom:10%; left:10%;'],
                 second:['right:15%; bottom:22.5%;', 'right:10%; bottom:20%;', 'top:7.5%; right:10%;']
@@ -49,11 +50,24 @@ export default {
     methods : {
         async loadProjects(){
             const list = await projectService.loadProjects();
-            this.projectsList = list.map(item => ({ project : item, positionIndex : this.randomPositionIndex() }));
-            this.isLoading = false;
-            this.projectsList.forEach(item => {
-                console.log(item.project.acf);
+            list.forEach(item => {
+                if(this.path === 'Collaborations' && typeof item.projectType[0] !== 'undefined'){
+                    let newItem = {project : item, positionIndex : this.randomPositionIndex()};
+                    this.projectsList.push(newItem);
+                }
+                if(this.path === 'Projets' && typeof item.projectType[0] === 'undefined'){
+                    let newItem = {project : item, positionIndex : this.randomPositionIndex()};
+                    this.projectsList.push(newItem);
+                }
             });
+            // this.projectsList = list.map(item => ({ 
+            //         project : item, positionIndex : this.randomPositionIndex() 
+            //     }));
+            this.isLoading = false;
+            // this.projectsList.forEach(item => {
+            //     console.log(item);
+            // });
+            console.log(this.projectsList)
         },
 
         randomPositionIndex(){

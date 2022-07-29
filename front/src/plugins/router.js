@@ -25,6 +25,11 @@ const routes = [
     name: 'Projets',
   },
   {
+    path: '/collaborations',
+    component: ProjectList,
+    name: 'Collaborations',
+  },
+  {
     path: '/projet/:slug',
     component: ProjectPage,
     name: 'Projet',

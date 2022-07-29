@@ -20,7 +20,17 @@ class Plugin
 
         add_action(
             'init',
+            [$this, 'createPortfolio']
+        );
+
+        add_action(
+            'init',
             [$this, 'createMusicTypeCustomTaxonomie']
+        );
+
+        add_action(
+            'init',
+            [$this, 'createCollaborationCustomTaxonomie']
         );
 
     }
@@ -103,12 +113,32 @@ class Plugin
         );
     }
 
+    public function createPortfolio()
+    {
+        register_post_type(
+            'portfolio',
+            [
+                'label' => 'Portfolio',
+                'labels' => [
+                    'name' => 'Portfolio',
+                    'not_found' => 'Aucun portfolio'
+                ],
+                'menu_position' => 3,
+                'public' => true,
+                'menu_icon' => 'dashicons-portfolio',
+                'map_meta_cap' => true,
+                // IMPORTANT WP le cpt recipe est accessible depuis l'api wordpress
+                'show_in_rest' => true
+            ]
+        );
+    }
+
     public function createMusicTypeCustomTaxonomie()
     {
         register_taxonomy(
             // identifiant de la taxonomy
             'music-type',
-            // la taxonomy 'technology" est application sur le cpt "project
+            // la taxonomy 'technology" est application sur le cpt "music"
             ['music'],
             // tableau d'options
             [
@@ -117,6 +147,33 @@ class Plugin
                 'public' => true,
                 'show_in_rest' => true
             ]
+        );
+    }
+
+public function createCollaborationCustomTaxonomie()
+    {
+        register_taxonomy(
+            // identifiant de la taxonomy
+            'projectType',
+            // la taxonomy 'technology" est application sur le cpt "project"
+            ['project'],
+            // tableau d'options
+            [
+                'label' => 'Type du projet',
+                'description' => 'Sélectionner s\'il s\'agit d\'une collaboration',
+                'hierarchical' => true,
+                'public' => true,
+                'show_in_rest' => true
+            ]
+        );
+
+        wp_insert_term(
+            'Collaboration',   // the term 
+            'projectType', // the taxonomy
+            array(
+                'description' => 'A selectionner si il s\'agit d\'une collaboration',
+                'slug'        => 'collaboration',
+            )
         );
     }
 

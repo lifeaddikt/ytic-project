@@ -16,8 +16,9 @@
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
                     <router-link :to="{ name: 'Projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
                     <router-link :to="{ name: 'Musique' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
-                    <a :href="`${publicPath}portfolio.pdf`" target="_blank"><li>Portfolio</li></a>
-                    <a href="https://sarayticshop.bigcartel.com/" target="_blank" class="shop"><li>Shop</li></a>
+                    <router-link :to="{ name: 'Collaborations' }" @click="isOpen = !isOpen"><li>Collaborations</li></router-link>
+                    <a :href="this.portfolio" target="_blank"><li>Portfolio</li></a>
+                    <a href="https://sarayticshop.bigcartel.com/" target="_blank"><li>Shop</li></a>
                 </ul>
             </nav>
 
@@ -41,6 +42,7 @@
 
 <script>
 import EmailModal from '../components/EmailModal.vue';
+import portfolioService from '../services/portfolioService.js';
 
 export default {
 
@@ -54,12 +56,14 @@ export default {
             isMobile: false,
             modalOn: false,
             publicPath: process.env.BASE_URL,
+            portfolio: '',
         }
     },
 
     created(){
 
         window.matchMedia("only screen and (max-width: 760px)").matches ? this.isMobile = true : this.isMobile = false;
+        this.loadPortfolio();
 
     },
 
@@ -67,7 +71,11 @@ export default {
         setModal(){
             this.modalOn = !this.modalOn;
         },
-    },
+        async loadPortfolio(){
+            let portfolioData = await portfolioService.loadPortfolio();
+            this.portfolio = portfolioData[0].acf.document_pdf;
+            console.log(this.portfolio);
+    },},
 
     computed : {
         age(){
@@ -219,11 +227,6 @@ export default {
                 border: variable.$menu-border;
                 display:inline-block;
                 min-width:165px;
-            }
-
-            .shop {
-                position: relative;
-                left: 50%;
             }
 
         }
