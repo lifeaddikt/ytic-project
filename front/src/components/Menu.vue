@@ -11,7 +11,6 @@
             <p>France</p>
         </header>
 
-        <transition name="menu">
             <nav class="menu__navigation" v-if="!isMobile || isMobile && isOpen">
                 <ul>
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
@@ -21,7 +20,6 @@
                     <a href="https://sarayticshop.bigcartel.com/" target="_blank" class="shop"><li>Shop</li></a>
                 </ul>
             </nav>
-        </transition>
 
 
         <nav class="menu__social-media">
@@ -33,10 +31,8 @@
         </nav>
 
         <div class="menu__burger" @click="isOpen = !isOpen">
-            <transition name="fade" mode="out-in">
                 <i v-if="!isOpen" class="fas fa-bars" key="open" ></i>
                 <i v-if="isOpen" class="fas fa-times" key="close"></i>
-            </transition>
         </div>
     </section>
     
@@ -214,14 +210,15 @@ export default {
             display:grid;
             grid-template-columns: 1fr 1fr;
             grid-column-gap:13px;
-            grid-row-gap:7.5px;
+            grid-row-gap:5.5px;
             justify-content: center;
 
 
             li {
+                font-size : 1.25rem;
                 border: variable.$menu-border;
                 display:inline-block;
-                min-width:155px;
+                min-width:165px;
             }
 
             .shop {

@@ -157,6 +157,7 @@ export default {
         font-size:18px;
         cursor: pointer;
         z-index: 10;
+        color : black;
 
         &:hover{
              box-shadow: variable.$inner-shadow;

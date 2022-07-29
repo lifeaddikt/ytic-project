@@ -1,7 +1,7 @@
 <template>
 
     <div class="loader">
-        <img src="../assets/images/loader.gif" />
+        <img src="../assets/images/Y1My.gif" />
     </div>
     
 </template>
@@ -25,7 +25,12 @@ export default {
     min-height:90vh;
 
 img {
-    width:250px;
+
+    width: 175px;
+
+    @media (min-width:1024px){
+        width:250px;
+    }
 }
 }
 

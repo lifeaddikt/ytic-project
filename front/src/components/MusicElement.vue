@@ -144,6 +144,7 @@ export default {
         }
 
         &-button {
+            color : black;
             cursor: pointer;
             background-color: transparent;
             border:none;

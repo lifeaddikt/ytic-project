@@ -2,7 +2,6 @@
     <main>
         <Menu />
         <article v-if="loading" class="page project-page">
-            <Loader />
         </article>
             <article v-if="!loading" class="page project-page">
                 <header class="header">
@@ -27,7 +26,6 @@
 
 <script>
 import Menu from '../components/Menu';
-import Loader from '../components/Loader';
 import projectService from '../services/projectService.js';
 
 export default {
@@ -93,7 +91,6 @@ export default {
 
     components : {
         Menu,
-        Loader
     },
     
 }
