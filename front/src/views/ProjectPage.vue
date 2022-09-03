@@ -33,7 +33,6 @@ export default {
     async created(){
         const slug = this.$route.params.slug;
         const datas = await projectService.loadProject(slug);
-        console.log(datas);
 
         this.title = datas.title.rendered;
         this.date = datas.acf.date;
@@ -46,7 +45,6 @@ export default {
 
         if (datas.next){
             this.previousSlug = datas.next.slug;
-            console.log(this.previousSlug);
         }
 
         if(datas.previous){

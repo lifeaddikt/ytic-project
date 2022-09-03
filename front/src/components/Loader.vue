@@ -1,7 +1,7 @@
 <template>
 
     <div class="loader">
-        <img src="../assets/images/Y1My.gif" />
+        <img src="../assets/images/Y1My.gif" alt="Loader symbolisé par un gif d'un chien qui cherche quelque chose en reniflant le sol" />
     </div>
     
 </template>

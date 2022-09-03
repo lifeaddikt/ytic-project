@@ -60,14 +60,7 @@ export default {
                     this.projectsList.push(newItem);
                 }
             });
-            // this.projectsList = list.map(item => ({ 
-            //         project : item, positionIndex : this.randomPositionIndex() 
-            //     }));
             this.isLoading = false;
-            // this.projectsList.forEach(item => {
-            //     console.log(item);
-            // });
-            console.log(this.projectsList)
         },
 
         randomPositionIndex(){

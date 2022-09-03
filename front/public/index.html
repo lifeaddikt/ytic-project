@@ -1,12 +1,78 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="fr">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="image/png" href="<%= BASE_URL %>ytichead.png" />
-    <script defer src="https://kit.fontawesome.com/ca652d4f2c.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://saraytic.fr/ytichead.png" />
+    <script
+      defer
+      src="https://kit.fontawesome.com/ca652d4f2c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Primary Meta Tags -->
     <title><%= process.env.VUE_APP_TITLE %></title>
+    <meta
+      name="description"
+      content="Sara Ytic (pseudonyme de Sara Laville) est une artiste pluridisciplinaire, mêlant vidéo, musique, objets multimédias et papier mâché, peintures digitales et acryliques."
+    />
+    <meta name="thumbnail" content="https://saraytic.fr/ytichead.png" />
+    <meta property="og:image" content="https://saraytic.fr/ytichead.png" />
+    
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://saraytic.fr/" />
+    <meta
+      property="og:title"
+      content="Sara Ytic"
+    />
+    <meta
+      property="og:description"
+      content="Sara Ytic (pseudonyme de Sara Laville) est une artiste pluridisciplinaire, mêlant vidéo, musique, objets multimédias et papier mâché, peintures digitales et acryliques."
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="https://saraytic.fr/ytichead.png" />
+    <meta property="twitter:url" content="https://saraytic.fr/" />
+    <meta
+      property="twitter:title"
+      content="Sara Ytic"
+    />
+    <meta
+      property="twitter:description"
+      content="Sara Ytic (pseudonyme de Sara Laville) est une artiste pluridisciplinaire, mêlant vidéo, musique, objets multimédias et papier mâché, peintures digitales et acryliques."
+    />
+    <meta
+      property="twitter:image"
+      content="https://saraytic.fr/ytichead.png"
+    />
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Sara Ytic",
+        "url": "https://saraytic.fr",
+        "thumbnailUrl" : "https://saraytic.fr/ytichead.png",
+        "author": {
+          "@type": "Person",
+          "name": "Sara Ytic",
+          "url": "https://saraytic.fr",
+          "jobTitle": "Artist",
+          "image": "https://saraytic.fr/ytichead.png",
+          "sameAs": [
+            "https://www.instagram.com/yticsara/",
+            "https://www.youtube.com/channel/UCRv64WMusLriZ05V0x3DCCw",
+            "https://soundcloud.com/sara-ytic",
+            "https://saraytic.fr"
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

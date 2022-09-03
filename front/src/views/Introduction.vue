@@ -7,16 +7,15 @@
         <div class="introduction__shine fifth layer" data-speed="4"></div>
         <div class="introduction__shine sixth layer" data-speed="2"></div>
 
-        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
-
         <div class="introduction__entry">
-            <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/new-title.png" alt="Sara Ytic">
+            <img draggable="false" class="introduction__title layer" data-speed="-1" src="../assets/images/new-title.png" alt="Sara Ytic écrit en grand dans un style chewing-gum">
             <router-link :to="{ name: 'Projets' }">
                 <button class="introduction__button layer" data-speed="0.25" type="button"><span><i class="fas fa-caret-right"></i></span> Entrer <span><i class="fas fa-caret-left"></i></span></button>
             </router-link>
         </div>
 
-        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="swaggy-cloud.jpeg">
+        <img draggable="false" class="introduction__cloud-1" src="../assets/images/nuage.png" alt="nuage réaliste qui se déplace dans le ciel">
+        <img draggable="false" class="introduction__cloud-2" src="../assets/images/nuage.png" alt="nuage réaliste qui se déplace dans le ciel">
     </main>
 </template>
 

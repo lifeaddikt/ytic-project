@@ -44,6 +44,12 @@ class Plugin
     }
 
 
+    public function deactivate()
+    {
+
+    }
+
+
     public function createProjectPostType()
     {
         register_post_type(
@@ -175,12 +181,6 @@ public function createCollaborationCustomTaxonomie()
                 'slug'        => 'collaboration',
             )
         );
-    }
-
-
-    public function deactivate()
-    {
-
     }
 
 

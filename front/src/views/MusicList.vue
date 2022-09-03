@@ -64,19 +64,21 @@ export default {
     margin:auto;
     display:grid;
     grid-template-columns: 1fr;
-    grid-gap: variable.$big-gutter;
     justify-content: center;
     overflow-y: scroll;
     min-height:90vh;
     height:98vh;
     overflow-y:scroll;
-    padding-bottom:50px;
+    padding-bottom:75px;
+    padding-top:30px;
+    grid-row-gap:75px;
     animation: componentAppear 1.5s linear forwards;
     &::-webkit-scrollbar {
     display: none;
 }
 
     @media (min-width: 1025px){
+        font-size:1.1rem;
         padding-bottom: 0;
         margin: 0 auto;
         width:100%;

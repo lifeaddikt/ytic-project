@@ -1,6 +1,6 @@
 <template>
     <div class="error">
-        <img src="../assets/images/error404.gif" />
+        <img src="../assets/images/error404.gif" alt='dessin error 404' />
     </div>
 </template>
 
