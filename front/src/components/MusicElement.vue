@@ -2,9 +2,9 @@
 
 <article class="music-element">
     <div class="music-element__visual">
-        <img class="music-element__visual__cover" :src="imageSrc" />
+        <img class="music-element__visual__cover" :src="imageSrc" :alt="alt" />
         <transition name="play">
-        <img v-if="isPlaying" src="../assets/images/CD.png" class="music-element__visual__CD" />
+        <img v-if="isPlaying" src="../assets/images/CD.png" class="music-element__visual__CD" alt="cd qui indique lorsqu'une musique est jouée" />
         </transition>
     </div>
 
@@ -35,6 +35,7 @@ export default {
             audioDuration: "0:00",
             maxDuration: 100,
             currentTime: "0:00",
+            alt: 'pochette CD de ' + this.title,
         }
     },
 
@@ -193,6 +194,11 @@ export default {
 
     &__description {
         text-align: left;
+
+        @media (min-width:1024px){
+        width:45%;
+        padding-inline:10px;
+    }
 
         p {
             margin-bottom:variable.$small-gutter;

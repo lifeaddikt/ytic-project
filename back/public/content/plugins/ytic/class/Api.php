@@ -48,6 +48,7 @@ class Api
     public function getNextAndPrevious($response, $post){
 
         global $post;
+
         // Get the so-called next post.
         $next = get_adjacent_post( false, '', false );
         // Get the so-called previous post.

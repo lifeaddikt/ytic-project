@@ -3,10 +3,10 @@
         <EmailModal :modalOn="modalOn" @modalOff="setModal"/>
         <header class="menu__header">
             <router-link :to="{ name: 'Accueil' }">
-                <img draggable="false" src="../assets/images/ytichead.png" alt="ytic-avatar.jpeg" class="menu__header__image">
+                <img draggable="false" src="../assets/images/ytichead.png" alt="tête miniature de sara ytic, logo du site saraytic.fr" class="menu__header__image">
                 <div class="menu__header__shine"></div>
             </router-link>
-            <p>Sara Laville aka Ytic</p>
+            <p>Sara Laville</p>
             <p>{{age}} ans</p>
             <p>France</p>
         </header>
@@ -16,17 +16,18 @@
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
                     <router-link :to="{ name: 'Projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
                     <router-link :to="{ name: 'Musique' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
-                    <a :href="`${publicPath}portfolio.pdf`" target="_blank"><li>Portfolio</li></a>
-                    <a href="https://sarayticshop.bigcartel.com/" target="_blank" class="shop"><li>Shop</li></a>
+                    <router-link :to="{ name: 'Collaborations' }" @click="isOpen = !isOpen"><li>Collaborations</li></router-link>
+                    <a :href="this.portfolio" target="_blank"><li>Portfolio</li></a>
+                    <a href="https://sarayticshop.bigcartel.com/" target="_blank"><li>Shop</li></a>
                 </ul>
             </nav>
 
 
         <nav class="menu__social-media">
             <ul>
-                <li><a href="https://www.instagram.com/yticsara/" target="_blank"><img draggable="false" src="../assets/images/instagram.png" alt="logo instagram"/></a></li>
-                <li><a href="https://soundcloud.com/sara-ytic" target="_blank"><img draggable="false" src="../assets/images/soundcloud.png" alt="logo instagram"/></a></li>
-                <li @click="modalOn= !modalOn"><img draggable="false" src="../assets/images/mail.png" alt="logo instagram"/></li>
+                <li><a href="https://www.instagram.com/yticsara/" target="_blank"><img draggable="false" src="../assets/images/instagram_logo.png" alt="logo redirigeant vers l'instagram de Sara Ytic"/></a></li>
+                <li><a href="https://soundcloud.com/sara-ytic" target="_blank"><img draggable="false" id="soundcloud" src="../assets/images/soundcloud_logo.png" alt="logo redirigeant vers le soundcloud de Sara Ytic"/></a></li>
+                <li @click="modalOn= !modalOn"><img draggable="false" src="../assets/images/message_logo.png" alt="logo pour ouvrir une modale d'envoi d'emails"/></li>
             </ul>
         </nav>
 
@@ -41,6 +42,7 @@
 
 <script>
 import EmailModal from '../components/EmailModal.vue';
+import portfolioService from '../services/portfolioService.js';
 
 export default {
 
@@ -54,12 +56,14 @@ export default {
             isMobile: false,
             modalOn: false,
             publicPath: process.env.BASE_URL,
+            portfolio: '',
         }
     },
 
     created(){
 
         window.matchMedia("only screen and (max-width: 760px)").matches ? this.isMobile = true : this.isMobile = false;
+        this.loadPortfolio();
 
     },
 
@@ -67,7 +71,10 @@ export default {
         setModal(){
             this.modalOn = !this.modalOn;
         },
-    },
+        async loadPortfolio(){
+            let portfolioData = await portfolioService.loadPortfolio();
+            this.portfolio = portfolioData[0].acf.document_pdf;
+    },},
 
     computed : {
         age(){
@@ -86,6 +93,11 @@ export default {
 <style scoped lang="scss">
 @use "../assets/scss/variable.scss";
 
+#soundcloud {
+    aspect-ratio: auto;
+    max-height: 26px;
+}
+
 .menu {
 
     margin-right:variable.$gutter;
@@ -94,6 +106,7 @@ export default {
     min-width: 165px;
     height:calc(100vh - 1rem);
     z-index:3;
+    font-size:1.1rem;
 
     @media (max-width:1025px){
         position:fixed;
@@ -140,7 +153,7 @@ export default {
         line-height:18px;
         background-color: variable.$light-pink;
         border: variable.$menu-border;
-        padding: variable.$tiny-gutter;
+        padding: variable.$small-gutter;
         margin-bottom: variable.$small-gutter;
         box-shadow: variable.$small-shadow;
         position: relative;
@@ -148,7 +161,7 @@ export default {
         &__shine {
             display: none;
             position:absolute;
-            top:0;
+            top:4.5px;
             left:50%;
             transform: translate(-50%);
             -webkit-mask-image: url(../assets/images/zizi.png);
@@ -221,11 +234,6 @@ export default {
                 min-width:165px;
             }
 
-            .shop {
-                position: relative;
-                left: 50%;
-            }
-
         }
     }
 
@@ -242,6 +250,7 @@ export default {
 
     &__social-media {
         margin-top:auto;
+
         ul {
             display:flex;
             justify-content: space-between;
@@ -262,6 +271,7 @@ export default {
             padding:variable.$small-gutter;
             box-shadow: variable.$small-shadow;
 
+
             &:hover{
              box-shadow: variable.$inner-shadow;
             }
@@ -278,6 +288,7 @@ export default {
         }
 
         img {
+            aspect-ratio: 1/1;
             width:100%;
             cursor:pointer;
         }
