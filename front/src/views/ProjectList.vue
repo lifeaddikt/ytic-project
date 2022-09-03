@@ -5,7 +5,7 @@
         <section v-if="!isLoading" class="project-list">
             <ul>
                 <li v-for="(item, index) in projectsList" :key="item.project.id">
-                    <router-link :to="{ name: 'Projet', params: { slug: item.project.slug } }" >
+                    <router-link :to="{ name: routerDestination, params: { slug: item.project.slug } }" >
                     ({{index + 1}}) {{item.project.title.rendered}}
                     </router-link>
                     <img v-if="item.project.acf.first_picture" :src="item.project.acf.first_picture.url" :alt="altPicture(item.project)" :style="position.first[item.positionIndex]"/>
@@ -22,6 +22,7 @@ import Menu from '../components/Menu.vue';
 import Loader from '../components/Loader.vue';
 
 import projectService from '../services/projectService.js';
+import collaborationService from '../services/collaborationService.js';
 
 export default {
 
@@ -31,7 +32,6 @@ export default {
   },
 
     created(){
-
         this.loadProjects();
     },
 
@@ -43,23 +43,22 @@ export default {
                 first:['left:10%; top:20%;', 'top:5%; left:10%;', 'bottom:10%; left:10%;'],
                 second:['right:15%; bottom:22.5%;', 'right:10%; bottom:20%;', 'top:7.5%; right:10%;']
             },
+            routerDestination: '',
             isLoading: true,
         }
     },
 
     methods : {
         async loadProjects(){
-            const list = await projectService.loadProjects();
+            let list;
+            this.path === 'Collaborations' ?  list = await collaborationService.loadCollaborations() : list = await projectService.loadProjects();
+
+            this.path === 'Collaborations' ?  this.routerDestination = 'Collaboration' : this.routerDestination = 'Projet'
+
             list.forEach(item => {
-                if(this.path === 'Collaborations' && typeof item.projectType[0] !== 'undefined'){
                     let newItem = {project : item, positionIndex : this.randomPositionIndex()};
                     this.projectsList.push(newItem);
-                }
-                if(this.path === 'Projets' && typeof item.projectType[0] === 'undefined'){
-                    let newItem = {project : item, positionIndex : this.randomPositionIndex()};
-                    this.projectsList.push(newItem);
-                }
-            });
+                });
             this.isLoading = false;
         },
 

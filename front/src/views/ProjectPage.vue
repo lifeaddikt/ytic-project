@@ -5,10 +5,10 @@
         </article>
             <article v-if="!loading" class="page project-page">
                 <header class="header">
-                    <router-link v-if="previousSlug" :to="{ name: 'Projet', params: { slug: previousSlug} }">
+                    <router-link v-if="previousSlug" :to="{ name: routerDestination, params: { slug: previousSlug} }">
                     <span class="header__previous btn"><i class="fas fa-caret-left"></i></span>
                     </router-link>
-                    <router-link v-if="nextSlug" :to="{ name: 'Projet', params: { slug: nextSlug} }">
+                    <router-link v-if="nextSlug" :to="{ name: routerDestination, params: { slug: nextSlug} }">
                     <span class="header__next btn"><i class="fas fa-caret-right"></i></span>
                     </router-link>
                     <h1>{{ title }}</h1>
@@ -27,12 +27,17 @@
 <script>
 import Menu from '../components/Menu';
 import projectService from '../services/projectService.js';
+import collaborationService from '../services/collaborationService.js';
 
 export default {
 
     async created(){
         const slug = this.$route.params.slug;
-        const datas = await projectService.loadProject(slug);
+        let datas;
+
+        this.$route.path.includes('collaboration') ? datas = await collaborationService.loadCollaboration(slug) : datas = await projectService.loadProject(slug);
+
+        this.$route.path.includes('collaboration') ?  this.routerDestination = 'Collaboration' : this.routerDestination = 'Projet';
 
         this.title = datas.title.rendered;
         this.date = datas.acf.date;
@@ -83,7 +88,8 @@ export default {
             imageAlt: '',
             loading:true,
             previousSlug:null,
-            nextSlug:null
+            nextSlug:null,
+            routerDestination: '',
         }
     },
 

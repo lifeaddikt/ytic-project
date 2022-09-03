@@ -35,6 +35,11 @@ const routes = [
     name: 'Projet',
   },
   {
+    path: '/collaboration/:slug',
+    component: ProjectPage,
+    name: 'Collaboration',
+  },
+  {
     path: '/infos',
     component: InformationsPage,
     name: 'Informations',

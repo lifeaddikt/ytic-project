@@ -12,6 +12,11 @@ class Plugin
             [$this, 'createProjectPostType']
         );
 
+        add_action(
+            'init',
+            [$this, 'createCollaborationPostType']
+        );
+
 
         add_action(
             'init',
@@ -26,11 +31,6 @@ class Plugin
         add_action(
             'init',
             [$this, 'createMusicTypeCustomTaxonomie']
-        );
-
-        add_action(
-            'init',
-            [$this, 'createCollaborationCustomTaxonomie']
         );
 
     }
@@ -70,6 +70,41 @@ class Plugin
                 'menu_position' => 3,
                 'hierarchical' => false,
                 'menu_icon' => 'dashicons-art',
+                'supports' => [
+                    'title',
+                    'thumbnail',
+                    'editor',
+                    'author',
+                    'custom-fields'
+                ],
+                'map_meta_cap' => true,
+
+                // IMPORTANT WP le cpt recipe est accessible depuis l'api wordpress
+                'show_in_rest' => true
+            ]
+        );
+    }
+
+    public function createCollaborationPostType()
+    {
+        register_post_type(
+            'collaboration',
+            [
+                'label' => 'Collaborations',
+                'labels' => [
+                    'name' => 'Collaborations',
+                    'singular_name' => 'collaboration',
+                    'add_new_item' => 'Ajouter une collaboration',
+                    'new_item' => 'Nom de la collaboration',
+                    'all_items' => 'Toutes les collaborations',
+                    'featured_image' => 'Image principale de la collaboration',
+                    'not_found' => 'Aucune collaboration enregistrée'
+                ],
+                'has_archive' => true,
+                'public' => true,
+                'menu_position' => 3,
+                'hierarchical' => false,
+                'menu_icon' => 'dashicons-groups',
                 'supports' => [
                     'title',
                     'thumbnail',
@@ -155,33 +190,5 @@ class Plugin
             ]
         );
     }
-
-public function createCollaborationCustomTaxonomie()
-    {
-        register_taxonomy(
-            // identifiant de la taxonomy
-            'projectType',
-            // la taxonomy 'technology" est application sur le cpt "project"
-            ['project'],
-            // tableau d'options
-            [
-                'label' => 'Type du projet',
-                'description' => 'Sélectionner s\'il s\'agit d\'une collaboration',
-                'hierarchical' => true,
-                'public' => true,
-                'show_in_rest' => true
-            ]
-        );
-
-        wp_insert_term(
-            'Collaboration',   // the term 
-            'projectType', // the taxonomy
-            array(
-                'description' => 'A selectionner si il s\'agit d\'une collaboration',
-                'slug'        => 'collaboration',
-            )
-        );
-    }
-
 
 }

@@ -17,6 +17,7 @@ class Api
 
     // Add filter to respond with next and previous post in post response.
     add_filter('rest_prepare_project', [$this, 'getNextAndPrevious'], 10, 2 );
+    add_filter('rest_prepare_collaboration', [$this, 'getNextAndPrevious'], 10, 2 );
 
     // STEP API enregistrement de notre api custom
     add_action('rest_api_init', [$this, 'initialize']);
