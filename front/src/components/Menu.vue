@@ -7,6 +7,7 @@
                 <div class="menu__header__shine"></div>
             </router-link>
             <p>Sara Laville</p>
+            <p style='font-size:13px'>𝓎𝓉𝒾𝒸</p>
             <p>{{age}} ans</p>
             <p>France</p>
         </header>
@@ -15,10 +16,10 @@
                 <ul>
                     <router-link :to="{ name: 'Informations' }" @click="isOpen = !isOpen"><li>Infos</li></router-link>
                     <router-link :to="{ name: 'Projets' }" @click="isOpen = !isOpen"><li>Projets</li></router-link>
-                    <router-link :to="{ name: 'Musique' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
                     <router-link :to="{ name: 'Collaborations' }" @click="isOpen = !isOpen"><li>Collaborations</li></router-link>
-                    <a :href="this.portfolio" target="_blank"><li>Portfolio</li></a>
-                    <a href="https://sarayticshop.bigcartel.com/" target="_blank"><li>Shop</li></a>
+                    <router-link :to="{ name: 'Musique' }" @click="isOpen = !isOpen"><li>Musique</li></router-link>
+                    <!-- <a :href="this.portfolio" target="_blank"><li>Portfolio</li></a>
+                    <a href="https://sarayticshop.bigcartel.com/" target="_blank"><li>Shop</li></a> -->
                 </ul>
             </nav>
 
@@ -26,7 +27,7 @@
         <nav class="menu__social-media">
             <ul>
                 <li><a href="https://www.instagram.com/yticsara/" target="_blank"><img draggable="false" src="../assets/images/instagram_logo.png" alt="logo redirigeant vers l'instagram de Sara Ytic"/></a></li>
-                <li><a href="https://soundcloud.com/sara-ytic" target="_blank"><img draggable="false" id="soundcloud" src="../assets/images/soundcloud_logo.png" alt="logo redirigeant vers le soundcloud de Sara Ytic"/></a></li>
+                <li><a href="Https://linktr.ee/yticsara" target="_blank"><img draggable="false" id="soundcloud" src="../assets/images/soundcloud_logo.png" alt="logo redirigeant le linktree musical de Sara Ytic"/></a></li>
                 <li @click="modalOn= !modalOn"><img draggable="false" src="../assets/images/message_logo.png" alt="logo pour ouvrir une modale d'envoi d'emails"/></li>
             </ul>
         </nav>
@@ -42,7 +43,7 @@
 
 <script>
 import EmailModal from '../components/EmailModal.vue';
-import portfolioService from '../services/portfolioService.js';
+// import portfolioService from '../services/portfolioService.js';
 
 export default {
 
@@ -56,14 +57,14 @@ export default {
             isMobile: false,
             modalOn: false,
             publicPath: process.env.BASE_URL,
-            portfolio: '',
+            // portfolio: '',
         }
     },
 
     created(){
 
         window.matchMedia("only screen and (max-width: 760px)").matches ? this.isMobile = true : this.isMobile = false;
-        this.loadPortfolio();
+        // this.loadPortfolio();
 
     },
 
@@ -71,10 +72,11 @@ export default {
         setModal(){
             this.modalOn = !this.modalOn;
         },
-        async loadPortfolio(){
-            let portfolioData = await portfolioService.loadPortfolio();
-            this.portfolio = portfolioData[0].acf.document_pdf;
-    },},
+    //     async loadPortfolio(){
+    //         let portfolioData = await portfolioService.loadPortfolio();
+    //         this.portfolio = portfolioData[0].acf.document_pdf;
+    // },
+},
 
     computed : {
         age(){

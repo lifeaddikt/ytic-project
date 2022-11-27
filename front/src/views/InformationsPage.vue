@@ -37,6 +37,7 @@ export default {
 
     created(){
         this.loadPage();
+        this.newtabsButton();
     },
 
     methods : {
@@ -50,8 +51,16 @@ export default {
         loaded(){
             this.loading = false;
         },
-    }
 
+        newtabsButton(){
+            setTimeout(() => {
+              const buttons = document.querySelectorAll('.wp-block-file__button');
+              buttons.forEach(button => {
+                button.setAttribute('target', '_blank');
+              });
+            }, "1000")
+        }
+    }
     
 }
 </script>

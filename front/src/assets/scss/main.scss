@@ -106,6 +106,18 @@ main {
     }
 
     //// Style des classes WP
+    
+    .wp-block-columns {
+        display:flex;
+        gap: variable.$big-gutter;
+        flex-direction: column;
+        width:100%;
+        box-sizing: border-box;
+
+        @media (min-width:768px){
+            flex-direction: row;
+        }
+    }
 
     /// Alignement du texte 
     .has-text-align-center {
@@ -121,7 +133,7 @@ main {
     }
 
     strong {
-        font-style: bold;
+        font-weight: bold;
     }
 
     /// Youtube & Soundcloud
@@ -267,12 +279,8 @@ main {
 
     .wp-block-file {
 
-        padding:variable.$gutter;
-        display:block;
-
         @media (min-width:1025px){
             margin-bottom:1.75rem;
-            padding:variable.$big-gutter 2rem ;
         }
 
         a {
@@ -282,7 +290,6 @@ main {
         &__button {
             border:1px solid black;
             padding:variable.$small-gutter;
-            margin-left:variable.$gutter;
             background-color: #efefef;
 
             &:hover {
